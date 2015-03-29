@@ -185,6 +185,7 @@ public class Sorter {
 	}
 
 	static void quickSort(int[] a, int from, int to){
+
 		if(from<to){
 			int p=partition(a, from, to);
 			quickSort(a, from, p-1);
