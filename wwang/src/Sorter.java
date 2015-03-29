@@ -9,7 +9,7 @@ public class Sorter {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] a=ArrayUtility.getInstance().generateRandomArray(10, 30);
+		int[] a=ArrayUtility.getInstance().generateRandomArray(10, 40);
 		System.out.println(Arrays.toString(a));
 		//insertionSort_CLRS(a);
 		//mergeSort(a);
