@@ -1,3 +1,4 @@
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,8 +14,12 @@ public class Sorter {
 		System.out.println(Arrays.toString(a));
 		//insertionSort_CLRS(a);
 		//mergeSort(a);
-		quickSort(a, 0, a.length-1);
+		heapSort(a);
+		//quickSort(a, 0, a.length-1);
 		System.out.println(Arrays.toString(a));
+		int t=binarySearch(a, 5);
+		System.out.println(t);
+		//System.out.println(Arrays.toString(a));
 		//countingSort(a, 0, 30);
 		//System.out.println(Arrays.toString(a));
 		//System.out.println(Arrays.toString(countingSort_CLRS(a,0,30) ));
@@ -23,6 +28,27 @@ public class Sorter {
 		double[] arr={0.12,0.05,0.098,0.18,0.6,0.8,0.99,0.1,0.005,0.55,0.7,0.4,0.3};
 		System.out.println(Arrays.toString(bucketSort(arr) ));
 
+	}
+	
+	static int binarySearch(int[] a, int targetNum){
+		int low=0, high=a.length-1, mid=0, suggestPos=0;
+		
+		while(low<=high){
+			mid=(low+high)/2;
+			if(a[mid]==targetNum) {
+				return mid;
+				
+			}
+			else if(a[mid]>targetNum){
+				high=mid-1;
+				suggestPos=mid-1;
+			}else{
+				low=mid+1;
+				suggestPos=mid+1;
+			}
+		}
+		
+		return suggestPos;
 	}
 
 	static void countingSort(int[] array, int min, int max){
@@ -191,6 +217,7 @@ public class Sorter {
 			quickSort(a, from, p-1);
 			quickSort(a, p+1, to);
 		}
+		
 	}
 	private static int partition(int[] array, int from, int to){
 		int pivot=array[to];
@@ -206,7 +233,70 @@ public class Sorter {
 		swap(array, i+1, to);
 		return i+1;
 	}
-
+	
+	static void heapSort(int[] a){
+		biuldMaxHeap(a);
+		int n=a.length-1;
+		while(n>0){
+			swap(a, 0, n);
+			n--;
+			heapify_Iterative(a,0,n);
+		}
+	}
+	private static void biuldMaxHeap(int[] a){
+		for(int i=a.length/2-1;i>=0;i--){
+			heapify_Iterative(a, i, a.length-1);
+		}
+	}
+	private static void heapify_Recursive(int[] a, int i, int endIndx){
+		
+		int l=getLeftChild(i);
+		int r=getRightChild(i);
+		int large=i;
+		if(l<=endIndx && a[l]>a[i]) large=l;
+		if(r<=endIndx && a[r]>a[large]) large=r;
+		if(large!=i){
+			swap(a, i, large);
+			heapify_Recursive(a, large, endIndx);
+		}
+		
+		return;
+	}
+	
+	private static void heapify_Iterative(int[] a, int i, int endIndx){
+		int node=a[i];
+		int moving=i;
+		boolean done=false;
+		while(!done){
+			int l=getLeftChild(moving);
+			if(l<=endIndx ){
+				int r=getRightChild(moving);
+				if(r<=endIndx && a[r]>a[l]) l=r;
+				if(a[l]>node){
+					a[moving]=a[l];
+					moving=l;
+				}else{
+					done=true;
+				}
+			}else{
+				done=true;
+			}
+		}
+		a[moving]=node;
+	}
+	
+	private static int getLeftChild(int i){
+		return 2*i + 1;
+	}
+	private static int getRightChild(int i){
+		return 2*i + 2;
+	}
+	private static int getParent(int i){
+		if(i%2==0)
+			return (i-2)/2;
+		else 
+			return (i-1)/2;
+	}
 
 
 }
