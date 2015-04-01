@@ -1,4 +1,5 @@
 package wang.DataStructure;
+
 public class Node implements Comparable{
 	public Object data;
 	public Node left;

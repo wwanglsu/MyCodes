@@ -24,7 +24,6 @@ public class TreeTraverse {
 		System.out.println("successor node: "+ successor_InOrder(root.right.left));
 
 
-
 	}
 	/**********Recursive**************/
 	static void inOrder_Recursive(Node root){
