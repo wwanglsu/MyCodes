@@ -21,7 +21,8 @@ public class TreeTraverse {
 		System.out.println("Minimum node: "+ minNode(root));
 		System.out.println("Maximum node: "+ maxNode(root));
 		System.out.println("Search node: "+ searchNode(root, 10));
-		System.out.println("successor node: "+ successor_InOrder(root.right.left));
+		System.out.println("successor node: "+ successor_InOrder(root.right));
+		System.out.println("predecessor node: "+ predecessor_InOrder(root.left.left));
 
 
 	}
@@ -80,7 +81,10 @@ public class TreeTraverse {
 		}
 	}
 
-	/*********************************/
+	/***************Iterative******************/
+
+
+	/******************************************/
 	static Node successor_InOrder(Node node){
 		if(node==null) {
 			return null;
@@ -92,6 +96,24 @@ public class TreeTraverse {
 			Node runner=node;
 			Node parent=runner.parent;
 			while(parent!=null && runner ==parent.right){
+				runner=parent;
+				parent=parent.parent;
+			}
+			return parent;
+		}
+	}
+
+	static Node predecessor_InOrder(Node node){
+		if(node==null) {
+			return null;
+		}
+
+		if(node.parent==null || node.left !=null){
+			return maxNode(node.left);
+		}else{
+			Node runner=node;
+			Node parent=runner.parent;
+			while(parent!=null && parent.left==runner){
 				runner=parent;
 				parent=parent.parent;
 			}
