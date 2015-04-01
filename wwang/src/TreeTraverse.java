@@ -1,4 +1,4 @@
-import wang.datastructure.Node;
+import wang.DataStructure.Node;
 
 
 public class TreeTraverse {
@@ -12,7 +12,7 @@ public class TreeTraverse {
 		root.left.left.parent=root.left; root.left.right.parent=root.left;
 		root.right.left=new Node(9); root.right.right=new Node(12);
 		root.right.left.parent=root.right; root.right.right.parent=root.right;
-		
+
 		inOrder_Recursive(root);
 		System.out.println();
 		preOrder_Recursive(root);
@@ -23,8 +23,8 @@ public class TreeTraverse {
 		System.out.println("Maximum node: "+ maxNode(root));
 		System.out.println("Search node: "+ searchNode(root, 10));
 		System.out.println("successor node: "+ successor_InOrder(root.right.left));
-		
-		
+
+
 
 	}
 	/**********Recursive**************/
@@ -35,7 +35,7 @@ public class TreeTraverse {
 			inOrder_Recursive(root.right);
 		}
 	}
-	
+
 	static void preOrder_Recursive(Node root){
 		if(root != null){
 			System.out.print(root+"   ");
@@ -43,7 +43,7 @@ public class TreeTraverse {
 			preOrder_Recursive(root.right);
 		}
 	}
-	
+
 	static void postOrder_Recursive(Node root){
 		if(root != null){
 			postOrder_Recursive(root.left);
@@ -51,7 +51,7 @@ public class TreeTraverse {
 			System.out.print(root+"   ");
 		}
 	}
-	
+
 	static Node minNode(Node root){
 		if(root != null && root.left !=null){
 			return minNode(root.left);
@@ -59,7 +59,7 @@ public class TreeTraverse {
 			return root;
 		}
 	}
-	
+
 	static Node maxNode(Node root){
 		if(root != null && root.right != null){
 			return maxNode(root.right);
@@ -67,21 +67,27 @@ public class TreeTraverse {
 			return root;
 		}
 	}
-	
+
 	static Node searchNode(Node root, Object target){
 		if(root !=null){
-			if(root.compareTo(target)==0) return root;
-			else if(root.compareTo(target)>0)return searchNode(root.left, target);
-			else return searchNode(root.right, target);
+			if(root.compareTo(target)==0) {
+				return root;
+			} else if(root.compareTo(target)>0) {
+				return searchNode(root.left, target);
+			} else {
+				return searchNode(root.right, target);
+			}
 		}else {
 			return root;
 		}
 	}
-	
+
 	/*********************************/
 	static Node successor_InOrder(Node node){
-		if(node==null) return null;
-		
+		if(node==null) {
+			return null;
+		}
+
 		if(node.parent==null || node.right !=null){
 			return minNode(node.right);
 		}else{
@@ -94,7 +100,7 @@ public class TreeTraverse {
 			return parent;
 		}
 	}
-	
-	
+
+
 
 }
