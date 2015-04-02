@@ -142,7 +142,9 @@ public class TreeTraverse {
 	}
 
 	static void postOrder_Iterative(Node root){
-
+		if(root==null) {
+			return;
+		}
 
 	}
 
