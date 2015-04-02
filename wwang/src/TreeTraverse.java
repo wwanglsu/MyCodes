@@ -31,8 +31,15 @@ public class TreeTraverse {
 		inOrder_Iterative(root);
 		System.out.println("\nPre Order Iterative:");
 		preOrder_Iterative(root);
+		System.out.println("\nPost Order Iterative 2 stacks:");
+		postOrder_Iterative_TwoStacks(root);
+		System.out.println("\nPost Order Iterative:");
+		postOrder_Iterative(root);
+		System.out.println("\nLevel Order Iterative:");
+		levelOrder(root);
 
 	}
+
 	/**********Recursive**************/
 	static void inOrder_Recursive(Node root){
 		if(root != null){
@@ -141,12 +148,75 @@ public class TreeTraverse {
 		}
 	}
 
+	static void postOrder_Iterative_TwoStacks(Node root){
+		if(root==null) {
+			return;
+		}
+		LinkedList<Node> stack=new LinkedList<Node>();
+		LinkedList<Node> output=new LinkedList<Node>();
+		stack.push(root);
+		while(!stack.isEmpty()){
+			output.push(stack.peek());
+			root=stack.pop();
+			if(root.left!=null) {
+				stack.push(root.left);
+			}
+			if(root.right!=null) {
+				stack.push(root.right);
+			}
+		}
+		while(!output.isEmpty()){
+			System.out.print(output.pop()+ "   " );
+		}
+	}
+
 	static void postOrder_Iterative(Node root){
 		if(root==null) {
 			return;
 		}
-
+		LinkedList<Node> stack=new LinkedList<Node>();
+		while(true){
+			if(root!=null){
+				if(root.right!=null) {
+					stack.push(root.right);
+				}
+				stack.push(root);
+				root=root.left;
+				continue;
+			}
+			if(stack.isEmpty()) {
+				return;
+			}
+			root=stack.pop(); //it is the leaf now
+			if(root.right!=null && !stack.isEmpty() && root.right==stack.peek()){
+				stack.pop();
+				stack.push(root);
+				root=root.right;
+			}else{
+				System.out.print(root+"   ");
+				root=null;
+			}
+		}
 	}
+
+	static void levelOrder(Node root){
+		if(root==null) {
+			return;
+		}
+		LinkedList<Node> queue=new LinkedList<Node>();
+		queue.offer(root);
+		while(!queue.isEmpty()){
+			root=queue.poll();
+			System.out.print(root+"   ");
+			if(root.left!=null) {
+				queue.offer(root.left);
+			}
+			if(root.right!=null) {
+				queue.offer(root.right);
+			}
+		}
+	}
+
 
 	/******************************************/
 	static Node successor_InOrder(Node node){
@@ -166,6 +236,7 @@ public class TreeTraverse {
 			return parent;
 		}
 	}
+
 
 	static Node predecessor_InOrder(Node node){
 		if(node==null) {
