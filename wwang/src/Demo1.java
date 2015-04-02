@@ -1,65 +1,76 @@
+import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 
 public class Demo1 {
-	static int a;
 
-
+	public Demo1(){}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Map<String, String> map=new Hashtable<String, String>();
-		map.put("aa", "hello");
-		map.put("aa", "hello234");
-
-		System.out.println(map.size()+" , "+map.get("aa"));
-
-		System.out.println(new Double(25.69).hashCode());
-
-		Pair<String, Integer> pair=new Pair<String, Integer>("hello", 8976);
-		System.out.println(pair.getFirst() +" ; "+pair.getSecond()+" ;  -> "+a);
-
-		pair.fill(new String[]{"hello","world","!\n******"});
-
-		Demo1 ob=new Demo1();
-		ob.fill( new Integer[]{ 10,20} );
-	}
-
-
-
-	public <E extends Comparable, Cloneable> void fill(E[] e){
-		new Demo1.Pair<String, String>("arg1","arg2").fill(e);
-	}
-
-	static class Pair<T,S>{
-		private T first;
-		private S second;
-
-		public Pair(T first, S second){
-			this.first=first;
-			this.second=second;
-		}
-
-		public <E extends Comparable , Cloneable > void fill(E... e){
-			for(E a : e){
-				System.out.print(a+" ");
+		class InnerClass2{
+			// TODO Auto-generated constructor stub
+			void fill(){
+				System.out.println("innerclass within main method.");
 			}
 		}
-
-		public T getFirst(){
-			return first;
+		
+		Demo1.InnerClass1 inc1=new Demo1.InnerClass1();
+		inc1.display();
+		
+		InnerClass2 inc2=new InnerClass2();
+		inc2.fill();
+		
+		Demo1.InnerClass3 inc3=new Demo1().new InnerClass3();
+		inc3.paint();
+		
+		Set<String> ss=new HashSet<String>();
+		ss.add("Hello");
+		ss.add("Hello1");
+		ss.add("Hello2");
+		System.out.println(ss.add("hello"));
+		Iterator<String> iterator=ss.iterator();
+		/*while(iterator.hasNext()){
+			String ele=iterator.next();
+			System.out.println(ele);
+		}*/
+		System.out.println(ss.size());
+		
+		if(iterator.hasNext()){
+			String p=iterator.next();
+			ss.remove(p);
+			ss.add("welcome");
 		}
-
-		public S getSecond(){
-			return second;
+		
+		System.out.println("*************************");
+		Map<String, String> map=new Hashtable<String, String>();
+		map.put("elo","girl1");
+		map.put("alo","girl2");
+		map.put("elt","girl3");
+		map.put("els","girl4");
+		map.put("ecs","girl5");
+		
+		for(String s: map.keySet()){
+			System.out.println(s+" : "+ map.get(s));
 		}
-
+		System.out.println( map.get("ds") );
 	}
-
-	static{
-		System.out.println("First print...");
-		//System.exit(0);
+	
+	static class InnerClass1{
+		// TODO Auto-generated constructor stub
+		void display(){
+			System.out.println("inner class outside main method.");
+		}		
+	}
+	
+	class InnerClass3{
+		void paint(){
+			System.out.println("Inner class 3");
+		}
 	}
 
 }

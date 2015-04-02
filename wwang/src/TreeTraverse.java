@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 import wang.DataStructure.Node;
 
 public class TreeTraverse {
@@ -23,7 +25,12 @@ public class TreeTraverse {
 		System.out.println("Search node: "+ searchNode(root, 10));
 		System.out.println("successor node: "+ successor_InOrder(root.right));
 		System.out.println("predecessor node: "+ predecessor_InOrder(root.left.left));
-
+		System.out.println("last k nodes");
+		last_K_inOrder_Recursive(root, 4);
+		System.out.println("\nIn Order Iterative:");
+		inOrder_Iterative(root);
+		System.out.println("\nPre Order Iterative:");
+		preOrder_Iterative(root);
 
 	}
 	/**********Recursive**************/
@@ -32,6 +39,19 @@ public class TreeTraverse {
 			inOrder_Recursive(root.left);
 			System.out.print(root+ "   ");
 			inOrder_Recursive(root.right);
+		}
+	}
+	static int count;
+	static void last_K_inOrder_Recursive(Node root, int k){
+		count=k;
+		if(root!=null && count>0){
+			last_K_inOrder_Recursive(root.right, k);
+			if(count>0) {
+				System.out.print(root+","+count+"  ");
+			}
+			count--;
+			k=count;
+			last_K_inOrder_Recursive(root.left, k);
 		}
 	}
 
@@ -82,7 +102,51 @@ public class TreeTraverse {
 	}
 
 	/***************Iterative******************/
+	static void inOrder_Iterative(Node root){
+		if(root==null) {
+			return;
+		}
+		LinkedList<Node> stack=new LinkedList<Node>();
+		while(true){
+			while(root!=null){
+				stack.push(root);
+				root=root.left;
+			}
+			if(stack.isEmpty()) {
+				return;
+			}
+			root=stack.pop();
+			System.out.print(root+"   ");
+			root=root.right;
+		}
+	}
 
+	static void preOrder_Iterative(Node root){
+		if(root==null) {
+			return;
+		}
+		LinkedList<Node> stack=new LinkedList<Node>();
+		boolean done=false;
+		while(true){
+			while(root!=null){
+				System.out.print(root+"   ");
+				stack.push(root);
+				root=root.left;
+			}
+			if(stack.isEmpty()){
+				return;
+			}
+			root=stack.pop();
+			root=root.right;
+		}
+	}
+
+	static void postOrder_Iterative(Node root){
+		if(root==null) {
+			return;
+		}
+
+	}
 
 	/******************************************/
 	static Node successor_InOrder(Node node){
