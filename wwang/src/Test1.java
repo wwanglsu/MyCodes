@@ -15,6 +15,11 @@ public class Test1 {
 	@Test
 	public void test2() {
 		//fail("Not yet implemented");
-		Assert.assertEquals(false, true);
+		//Assert.assertEquals(false, true);
+		int res=1;
+		for(int i=2; i<=35; i++){
+			res=res^i;
+		}
+		System.out.println(res^2);
 	}
 }
