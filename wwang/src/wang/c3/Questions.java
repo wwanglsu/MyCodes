@@ -21,6 +21,21 @@ public class Questions {
         System.out.println(stack1.pop().value);
         System.out.println(stack2.min());
         System.out.println(stack2.pop());
+
+        MyQueue<Integer> queue=new MyQueue<Integer>();
+        queue.add(100); queue.add(29); queue.add(20); queue.add(4); queue.add(78); queue.add(60);
+
+        System.out.println("queue size: "+queue.size());
+        System.out.println(queue.remove());
+
+        Stack ss=new Stack();
+        ss.add(100); ss.add(29); ss.add(20); ss.add(4); ss.add(78); ss.add(60);
+        Stack re=sort(ss);
+        while(! re.isEmpty()){
+            System.out.print(re.pop()+ "  " );
+        }
+
+
     }
 
     /********* 3.2 stack with min() O(1) ************/
@@ -93,6 +108,63 @@ public class Questions {
 
     }
     /********* 3.2 stack with min() O(1) ************/
-    /********* 3.2 stack with min() O(1) ************/
+
+    /********* 3.5 MyQueue with two stacks ************/
+    static class MyQueue<T>{
+        Stack<T> newStack;
+        Stack<T> oldStack;
+
+        public MyQueue(){
+            newStack=new Stack<T>();
+            oldStack=new Stack<T>();
+        }
+
+        public int size(){
+            return oldStack.size()+newStack.size();
+        }
+
+        public void add(T e){
+            newStack.add(e);
+        }
+
+        public T peek(){
+            shiftStacks();
+            return oldStack.peek();
+        }
+
+        public T remove(){
+            shiftStacks();
+            return oldStack.pop();
+        }
+
+        private void shiftStacks(){
+            if(oldStack.isEmpty()){
+                while(!newStack.isEmpty()) {
+                    oldStack.push(newStack.pop());
+                }
+            }
+        }
+    }
+    /********* 3.5 MyQueue with two stacks ************/
+
+    /********* 3.6 Sort stack with ascending ************/
+    static Stack<Integer> sort(Stack<Integer> s){
+        Stack<Integer> r=new Stack<Integer>();
+        while(!s.isEmpty()){
+            int temp=s.pop();
+            while(!r.isEmpty() && temp< r.peek()){
+                s.push(r.pop());
+            }
+            r.push(temp);
+        }
+        return r;
+    }
+    /********* 3.6 Sort stack with ascending ************/
+
+
+
+
+
+
 
 }
