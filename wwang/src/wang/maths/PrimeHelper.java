@@ -3,15 +3,22 @@ package wang.maths;
 import java.util.ArrayList;
 
 public class PrimeHelper {
+    private static volatile PrimeHelper instance;
+    private PrimeHelper(){}
 
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        System.out.println("is prime 1: "+isPrime1(49));
-        System.out.println("is prime 2: "+isPrime1(17));
-        System.out.println(sieveOfEratosthenes1(50));
+    public static PrimeHelper getInstance(){
+        if(instance==null){
+            synchronized (PrimeHelper.class) {
+                if(instance==null){
+                    instance=new PrimeHelper();                    
+                }                    
+            }
+        }
+        return instance;
     }
 
     //check whether a prime number
+    @Deprecated
     public static boolean isPrime1(int num){
         if(num<2) {
             return false;
@@ -38,7 +45,7 @@ public class PrimeHelper {
     }
 
     //generate a list of prime number
-    public static ArrayList<Integer> sieveOfEratosthenes1(int num){
+    public ArrayList<Integer> sieveOfEratosthenes1(int num){
         boolean[] flags=new boolean[num+1];
         for(int i=0; i<=num; i++){
             flags[i]=true; // initialize to true
@@ -61,16 +68,40 @@ public class PrimeHelper {
         }
         return list;
     }
-    private static void crossOff(boolean[] flags, int prime){
+    private void crossOff(boolean[] flags, int prime){
         for(int i=prime*prime; i<flags.length; i+=prime){
             flags[i]=false;
         }
     }
-    private static int getNextPrime(boolean[] flags, int prime){
+    private int getNextPrime(boolean[] flags, int prime){
         int next=prime+1;
         while(next<flags.length && !flags[next]){
             next++;
         }
         return next;
     }
+
+    public ArrayList<Integer> sieveOfEratosthenes2(int num){
+        boolean[] flags=new boolean[num+1];
+        ArrayList<Integer> list=new ArrayList<Integer>();
+        for(int i=2; i<=num; i++){
+            flags[i]=true; // initialize to true
+        }
+        for(int i=2; i<=(int)Math.sqrt(num); i++){
+            if(flags[i]){
+                for(int j=i*i; j<=num; j+=i){
+                    if(flags[j]) {
+                        flags[j]=false;
+                    }
+                }
+            }
+        }
+        for(int i=2; i<=num; i++){
+            if(flags[i]) {
+                list.add(i);
+            }
+        }        
+        return list;
+    }
+
 }
