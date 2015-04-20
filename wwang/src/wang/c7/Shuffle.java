@@ -14,6 +14,7 @@ public class Shuffle {
         System.out.println(Arrays.toString(array));
         shuffle(array);
         System.out.println(Arrays.toString(array));
+        System.out.print("" instanceof String);
     }
 
     static int[] shuffle(int[] array){
