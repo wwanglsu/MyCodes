@@ -12,7 +12,7 @@ public class Sorter {
         int[] a=ArrayUtility.getInstance().generateRandomArray(10, 40);
         System.out.println(Arrays.toString(a));
         //insertionSort_CLRS(a);
-        //mergeSort(a);
+        mergeSort(a);
         //heapSort(a);
         //quickSort(a, 0, a.length-1);
         System.out.println(Arrays.toString(a));
@@ -170,7 +170,7 @@ public class Sorter {
             return;
         }
 
-        int[] first=new int[array.length/2];
+        int[] first=new int[(array.length/2)];
         int[] second=new int[array.length-first.length];
 
         for(int i=0; i<first.length; i++){
