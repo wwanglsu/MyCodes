@@ -31,6 +31,24 @@ public class Questions {
         int[][] matrix={{1,2,3,4,5},{3,7,11,15,19},{5,15,25,35,45},{20,40,60,80,100}};
         System.out.println(ArrayUtility.getInstance().printMatrix(matrix));
         System.out.println("binary search matrix: "+findElement1(matrix, 15));
+
+        for(int i=0; i<10; i++){
+            int x=ArrayUtility.getInstance().randomIntRange(0, 30);
+            track(x);
+        }
+        inOrder_Recursive(root);
+        for(int i=0; i<10;i++){
+            int rank=getRankOfNumber(i);
+            System.out.println("\n"+i+" has rank: "+rank);
+        }
+    }
+
+    static void inOrder_Recursive(RankNode root){
+        if(root != null){
+            inOrder_Recursive(root.left);
+            System.out.print(root+ "   ");
+            inOrder_Recursive(root.right);
+        }
     }
 
     /****11.1 merge two sorted arrays**********************************/
@@ -242,9 +260,10 @@ public class Questions {
     /*****11.6 binary search M*N matrix****/
 
     /*****11.7 circus, longest increasing subsequence*******************/
+    @SuppressWarnings("unchecked")
     static ArrayList<People> getIncreasingSequence(ArrayList<People> items){
         Collections.sort(items);
-        return longestIncreasingSubsequence(items);
+        return longestIncreasingSubsequence(items);  //O(n^2)
     }
     private static ArrayList<People> longestIncreasingSubsequence(ArrayList<People> items){
         ArrayList<People>[] solutions=new ArrayList[items.size()];
@@ -287,4 +306,19 @@ public class Questions {
         longestIncreasingSubsequence(items, solutions, current_index+1);
     }
     /*****11.7 circus, longest increasing subsequence*******************/
+
+    /******11.8 get rank of number************/
+    static RankNode root=null;
+    static void track(int num){
+        if(root==null) {
+            root=new RankNode(num);
+        } else {
+            root.insert(num);
+        }
+    }
+
+    static int getRankOfNumber(int num){
+        return root.getRank(num);
+    }
+    /******11.8 get rank of number************/
 }
