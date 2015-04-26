@@ -1,6 +1,8 @@
 package wang.c11;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -187,6 +189,102 @@ public class Questions {
         return false;
     }
 
+    static Coordinate findElement2(int[][] matrix, int target){
+        Coordinate origin=new Coordinate(0, 0);
+        Coordinate dest=new Coordinate(matrix.length-1, matrix[0].length-1);
+        return findElement2(matrix, origin, dest, target);
+    }
+    private static Coordinate findElement2(int[][] matrix, Coordinate origin, Coordinate dest, int target){
+        if(!origin.inBounds(matrix) && !dest.inBounds(matrix) ) {
+            return null;
+        }
+        if(origin.isBefore(dest)) {
+            return null;
+        }
+        if(matrix[origin.row][origin.column]==target) {
+            return origin;
+        }
+        if(matrix[dest.row][dest.column]==target) {
+            return dest;
+        }
 
+        Coordinate start=(Coordinate)origin.clone();
+        int diagDist=Math.min(dest.row-origin.row, dest.column-origin.column);
+        Coordinate end=new Coordinate(start.row+diagDist, start.column+diagDist);
+        Coordinate p=new Coordinate(0, 0);
+        //binary search on diagonal, look for the first element greater than target
+        while(start.isBefore(end)){
+            p.setToAverage(start, end);
+            if(target > matrix[p.row][p.column]){
+                start.row=p.row+1;
+                start.column=p.column+1;
+            }else{
+                end.row=p.row-1;
+                end.column=p.column-1;
+            }
+        }
+        //split into quadrants, search the bottom left and top right.
+        return partitionAndSearch(matrix, origin, dest, start, target);
+    }
+    private static Coordinate partitionAndSearch(int[][] matrix, Coordinate origin, Coordinate dest, Coordinate pivot, int target){
+        Coordinate lowerLeftOrigin=new Coordinate(pivot.row, origin.column);
+        Coordinate lowerLeftDest=new Coordinate(dest.row, pivot.column-1);
+        Coordinate upperRightOrigin=new Coordinate(origin.row, pivot.column);
+        Coordinate upperRightDest=new Coordinate(pivot.row-1, dest.column);
+
+        Coordinate lowerLeft=findElement2(matrix, lowerLeftOrigin, lowerLeftDest, target);
+        if(lowerLeft==null) {
+            return findElement2(matrix, upperRightOrigin, upperRightDest, target);
+        }
+        return lowerLeft;
+
+    }
     /*****11.6 binary search M*N matrix****/
+
+    /*****11.7 circus, longest increasing subsequence*******************/
+    static ArrayList<People> getIncreasingSequence(ArrayList<People> items){
+        Collections.sort(items);
+        return longestIncreasingSubsequence(items);
+    }
+    private static ArrayList<People> longestIncreasingSubsequence(ArrayList<People> items){
+        ArrayList<People>[] solutions=new ArrayList[items.size()];
+        longestIncreasingSubsequence(items, solutions, 0);
+
+        ArrayList<People> best_sequence=null;
+        for(int i=0; i<solutions.length; i++){
+            best_sequence=seqWithMaxLength(best_sequence, solutions[i]);
+        }
+        return best_sequence;
+    }
+    private static ArrayList<People> seqWithMaxLength(ArrayList<People> p, ArrayList<People> q){
+        if(p==null) {
+            return q;
+        } else if(q==null) {
+            return p;
+        }
+        return p.size() > q.size() ? p: q;
+    }
+    private static void longestIncreasingSubsequence(ArrayList<People> items, ArrayList<People>[] solutions, int current_index){
+        if(current_index >= items.size() || current_index <0) {
+            return;
+        }
+        People current=items.get(current_index);
+        //find longest sequence that we can append current to
+        ArrayList<People> best_sequence=null;
+        for(int i=0; i<current_index; i++){
+            if(items.get(i).isBefore(current)){
+                best_sequence=seqWithMaxLength(best_sequence, solutions[i]);
+            }
+        }
+
+        ArrayList<People> new_solution=new ArrayList<People>();
+        if(best_sequence!=null){
+            new_solution.addAll(best_sequence);
+        }
+        new_solution.add(current);
+
+        solutions[current_index]=new_solution;
+        longestIncreasingSubsequence(items, solutions, current_index+1);
+    }
+    /*****11.7 circus, longest increasing subsequence*******************/
 }
