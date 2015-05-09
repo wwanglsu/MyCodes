@@ -107,6 +107,7 @@ public class Questions {
     /*********10.3 Find Missing Number****************/
     static long numberOfInts=(long)Integer.MAX_VALUE+1;
     static byte[] bitField=new byte[(int)(numberOfInts/8)];
+    @SuppressWarnings("resource")
     static void findMissingNum1(String filePath) throws FileNotFoundException{
         Scanner in=new Scanner(new FileReader(filePath));
         while(in.hasNextInt()){
@@ -132,6 +133,7 @@ public class Questions {
     static byte[] bitfield=new byte[bitsize/8];
     static int[] blocks=new int[blockNum];
     static void findMissingNum2(String filePath) throws FileNotFoundException{
+        @SuppressWarnings("resource")
         Scanner in=new Scanner(new FileReader(filePath));
         int start=0;
         while(in.hasNextInt()){
