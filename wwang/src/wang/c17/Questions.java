@@ -1,5 +1,8 @@
 package wang.c17;
 
+import java.util.Arrays;
+import java.util.Hashtable;
+
 
 
 
@@ -28,6 +31,20 @@ public class Questions {
         int[] array1=new int[]{1,-2,4,7,-10,-11,7,-12,6,7,16,-18,19};
         System.out.println(getContinuousMaxSum1(array1));
         System.out.println(getContinuousMaxSum2(array1, 0, array1.length-1));
+
+        Element root=new Element("family");
+        Attribute a1=new Attribute("lastName", "Wang");
+        Attribute a2=new Attribute("state", "CA");
+        root.insert(a1); root.insert(a2);
+        Element child=new Element("person","Some Message");
+        Attribute a3=new Attribute("firstName", "Stanly");
+        child.insert(a3);
+        root.insert(child);
+        System.out.println(encodeXML(root));
+        System.out.println(rand7());
+
+        int[] test = {9, 3, 6, 5, 7, -1, 13, 14, -2, 7, 12, 0};
+        printAllTwoSum(test, 12);
     }
 
     /*****17.1 swap a number in place without temporary variable*********/
@@ -403,5 +420,132 @@ public class Questions {
         }
     }
     /*****17.8 find the contiguous max sum***************/
+
+    /*****17.9 find frequency of any given word in book****************/
+    //Per-process the book words
+    static Hashtable<String, Integer> buildDictionary(String[] book){
+        Hashtable<String, Integer> table=new Hashtable<String, Integer>();
+        for(String word:book){
+            word=word.toLowerCase();
+            if(! word.trim().isEmpty()){
+                if(! table.containsKey(word)){
+                    table.put(word, 0);
+                }
+                table.put(word, table.get(word)+1);
+            }            
+        }
+        return table;
+    }
+    static int getFrequncy(Hashtable<String, Integer> dict, String word){
+        if(dict==null || word==null) {
+            return -1;
+        }
+        word=word.toLowerCase();
+        if(dict.containsKey(word)){
+            return dict.get(word);
+        } else {
+            return 0;
+        }
+    }
+    /*****17.9 find frequency of any given word in book****************/
+
+    /******17.10 parse XML (encode)*************/
+    private static void encode(String v, StringBuffer sb){
+        v=v.replace("0", "\\0");
+        sb.append(v);
+        sb.append(" ");
+    }
+    private static void encodeEnd(StringBuffer sb){
+        sb.append("0");
+        sb.append(" ");
+    }
+    private static void encode(Attribute attribute, StringBuffer sb){
+        encode(attribute.getTagCode(), sb);
+        encode(attribute.value, sb);
+    }
+    private static void encode(Element root, StringBuffer sb){
+        encode(root.getNameCode(), sb);
+        for(Attribute a: root.attributes){
+            encode(a, sb);
+        }
+        encodeEnd(sb);
+
+        if(root.value != null && root.value != ""){
+            encode(root.value, sb);
+        }else{
+            for(Element e: root.children){
+                encode(e, sb);
+            }
+        }
+        encodeEnd(sb);
+    }
+
+    static String encodeXML(Element root){
+        StringBuffer sb=new StringBuffer();
+        encode(root, sb);
+        return sb.toString();
+    }    
+    /******17.10 parse XML (encode)*************/
+
+    /******17.11 implement rand7() by rand5()**************/
+    static int rand5(){
+        return (int)(Math.random() * 100) % 5;
+    }
+    static int rand7(){ //with equal probability
+        while(true){
+            int r1= 2*rand5();
+            int r2=rand5();
+            if(r2 !=4){
+                int rand1= r2 %2;
+                int num=rand1 + r1;
+                if(num<7) {
+                    return num;
+                }
+            }
+        }
+    }
+    /******17.11 implement rand7() by rand5()**************/
+
+    /******17.12 print all pair of Two Sum******************/
+    static void printAllTwoSum(int[] array, int sum){
+        Arrays.sort(array);
+        int first=0, last=array.length-1;
+        while(first <last){
+            int s=array[first]+array[last];
+            if(s==sum){
+                System.out.println(array[first] +" , "+array[last]);
+                first++;
+                last--;
+            }else{
+                if(s>sum) {
+                    last--;
+                } else {
+                    first++;
+                }
+            }
+        }
+    }
+    //below return the index
+    static int[] twoSum(int[] numbers, int target) {
+        if(numbers==null) {
+            return null;
+        }
+        int[] result=new int[2];
+        Hashtable<Integer,Integer> table=new Hashtable<Integer,Integer>();
+        for(int i=0;i<numbers.length;i++){
+            if(!table.isEmpty()&&table.containsKey(target-numbers[i])){
+                result[0]=table.get(target-numbers[i])+1;
+                result[1]=i+1;
+                break;
+            }
+            table.put(numbers[i],i);
+        }
+        return result;
+    }
+    /******17.12 find all pair of Two Sum******************/
+
+    /******17.13 convert BiNode Binary Search Tree into double linkedlist***********/
+
+    /******17.13 convert BiNode Binary Search Tree into double linkedlist***********/
 
 }
