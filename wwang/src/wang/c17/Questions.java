@@ -3,9 +3,6 @@ package wang.c17;
 import java.util.Arrays;
 import java.util.Hashtable;
 
-
-
-
 public class Questions {
 
     public static void main(String[] args) {
@@ -545,7 +542,100 @@ public class Questions {
     /******17.12 find all pair of Two Sum******************/
 
     /******17.13 convert BiNode Binary Search Tree into double linkedlist***********/
+    //method 1, extra data structure
+    static NodePair convert(BiNode root){
+        if(root==null) {
+            return null;
+        }
+        NodePair part1=convert(root.node1);
+        NodePair part2=convert(root.node2);
 
+        if(part1!=null) {
+            concat(part1.tail, root);
+        }
+        if(part2!=null) {
+            concat(root, part2.head);
+        }
+
+        return new NodePair(part1==null? root: part1.head, part2==null?root:part2.tail);        
+    }
+    static void concat(BiNode x, BiNode y){
+        x.node2=y;
+        y.node1=x;
+    }
+    static void printLinkedListTree(BiNode root){
+        for(BiNode node=root; node !=null; node=node.node2){
+            if(node.node2 !=null && node.node2.node1!=node) {
+                System.out.print("inconsistent node: "+node);
+            }
+            System.out.print(node.data+" -> ");
+        }
+        System.out.println();
+    }
+    //method 2:  O(N^2)
+    static BiNode convert2(BiNode root){
+        if(root==null) {
+            return null;
+        }
+        BiNode part1=convert2(root.node1);
+        BiNode part2=convert2(root.node2);
+        if(part1!=null) {
+            concat(getTail(part1), root);
+        }
+        if(part2!=null) {
+            concat(root, part2);
+        }
+        return part1==null? root: part1;
+    }
+    static BiNode getTail(BiNode node){
+        if(node == null) {
+            return null;
+        }
+        while(node.node2 != null){
+            node=node.node2;
+        }
+        return node;
+    }
+    //method 3: O(N)
+    static BiNode convert3(BiNode root){
+        BiNode head=convertToCircular(root);
+        head.node1.node2=null;
+        head.node1=null;
+        return head;
+    }
+    static BiNode convertToCircular(BiNode root){
+        if(root==null) {
+            return null;
+        }
+        BiNode part1=convertToCircular(root.node1);
+        BiNode part3=convertToCircular(root.node2);
+        if(part1 ==null && part3==null){
+            root.node1=root;
+            root.node2=root;
+            return root;
+        }
+        BiNode tail3= part3==null ? null:part3.node1;
+        //join left to root
+        if(part1==null) {
+            concat(part3.node1, root);
+        } else {
+            concat(part1.node1, root);
+        }
+        //join right to root
+        if(part3==null) {
+            concat(root, part1);
+        } else {
+            concat(root, part3);
+        }
+        //join right to left
+        if(part1 !=null && part3 !=null) {
+            concat(tail3, part1);
+        }
+        return part1==null ? root: part1;
+    }
     /******17.13 convert BiNode Binary Search Tree into double linkedlist***********/
 
+    /******17.14 parse string with minimum unrecognized characters********/
+
+    /******17.14 parse string with minimum unrecognized characters********/
 }
