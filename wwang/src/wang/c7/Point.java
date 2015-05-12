@@ -12,7 +12,7 @@ public class Point {
         return this.x==p.x && this.y==p.y;
     }
 
-    public String tosString(){
+    public String toString(){
         return "( "+ x +", "+y+" )";
     }
 }
