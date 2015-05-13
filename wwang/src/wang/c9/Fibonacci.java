@@ -7,7 +7,7 @@ public class Fibonacci {
         System.out.println(fibonacci(23));
         int[] cache=new int[100];
         System.out.println(fibonacci_DP(23, cache));
-
+        System.out.println(fibonacci_DP(23));
     }
 
     static int fibonacci(int i){ //recursive
@@ -32,5 +32,15 @@ public class Fibonacci {
         }
         cache[i]=fibonacci_DP(i-1, cache) + fibonacci_DP(i-2, cache);        
         return cache[i];
+    }
+
+    //Iterative
+    static int fibonacci_DP(int n){
+    	int[] arr=new int[n+1];
+    	arr[0]=0; arr[1]=1;
+    	for(int i=2; i<=n; i++){
+    		arr[i]=arr[i-1]+arr[i-2];
+    	}
+    	return arr[n];
     }
 }
