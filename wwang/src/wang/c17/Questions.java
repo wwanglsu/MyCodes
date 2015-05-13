@@ -1,7 +1,14 @@
 package wang.c17;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.Scanner;
+
+import wang.utility.TrieTree;
 
 public class Questions {
 
@@ -42,6 +49,27 @@ public class Questions {
 
         int[] test = {9, 3, 6, 5, 7, -1, 13, 14, -2, 7, 12, 0};
         printAllTwoSum(test, 12);
+
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader("E:\\GitRepository\\git\\MyCodes\\wwang\\src\\wang\\c17\\dict.txt");
+            Scanner in=new Scanner(fileReader);
+            List<String> lines = new ArrayList<String>();
+            while (in.hasNextLine()) {
+                lines.add(in.nextLine());
+            }
+            String[] arr = lines.toArray(new String[0]);
+            dictionary=new TrieTree(arr);
+            sentence="this is an Jim apple of";
+            sentence=clean(sentence);
+            System.out.println(sentence);
+            Hashtable<Integer, Wrapper> cache=new Hashtable<Integer, Wrapper>();
+            Wrapper res=parseWithWrapper(0, 0, cache);
+            System.out.println(res);
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /*****17.1 swap a number in place without temporary variable*********/
@@ -636,6 +664,88 @@ public class Questions {
     /******17.13 convert BiNode Binary Search Tree into double linkedlist***********/
 
     /******17.14 parse string with minimum unrecognized characters********/
+    static String sentence;
+    static TrieTree dictionary;
+    static String clean(String str){
+        char[] punctuation={',', '"', '!', '.', '\'', '?', ','};
+        for(char c:punctuation){
+            str=str.replace(c, ' ');
+        }
+        return str.replace(" ", "").toLowerCase();
+    }
+    static int parseSimple(int wordStart, int wordEnd){
+        if(wordEnd>=sentence.length() ) {
+            return wordEnd - wordStart;
+        }
 
+        String word=sentence.substring(wordStart, wordEnd+1);
+        //break current word
+        int bestExact=parseSimple(wordEnd+1, wordEnd+1);
+
+        if(! dictionary.contains(word, true)){
+            bestExact +=word.length();
+        }
+        //extend current word
+        int bestExtend=parseSimple(wordStart, wordEnd+1);
+        //find best
+        return Math.min(bestExact, bestExtend);
+    }
+
+    static int parseWithCache(int wordStart, int wordEnd, Hashtable<Integer, Integer> cache){
+        if(wordEnd>=sentence.length()) {
+            return wordEnd -wordStart;
+        }
+
+        if(cache.containsKey(wordStart)) {
+            return cache.get(wordStart);
+        }
+
+        String currentWord=sentence.substring(wordStart, wordEnd+1);
+        boolean validPartial = dictionary.contains(currentWord, false);
+        //break current word
+        int bestExact=parseWithCache(wordEnd+1, wordEnd+1, cache);
+        if(!validPartial || !dictionary.contains(currentWord, true)){
+            bestExact +=currentWord.length();
+        }
+        //extend current word
+        int bestExtend=Integer.MAX_VALUE;
+        if(validPartial){
+            bestExtend=parseWithCache(wordStart, wordEnd+1, cache);
+        }
+
+        //find best
+        int min=Math.min(bestExact, bestExtend);
+        cache.put(wordStart, min);
+        return min;        
+    }
+
+    static Wrapper parseWithWrapper(int wordStart, int wordEnd, Hashtable<Integer, Wrapper> cache){
+        if(wordEnd >= sentence.length()){
+            return new Wrapper(wordEnd-wordStart, sentence.substring(wordStart).toUpperCase() );
+        }
+        if(cache.containsKey(wordStart)){
+            return (Wrapper) cache.get(wordStart).clone();
+        }
+        String currentWord=sentence.substring(wordStart, wordEnd+1);
+        boolean validPartial = dictionary.contains(currentWord, false);
+        boolean validExact=validPartial && dictionary.contains(currentWord, true);
+        //break current word
+        Wrapper bestExact=parseWithWrapper(wordEnd+1, wordEnd+1, cache);
+        if(validExact){
+            bestExact.parsed=currentWord +" "+bestExact.parsed;
+        }else{
+            bestExact.invalid +=currentWord.length();
+            bestExact.parsed = currentWord.toUpperCase() +" "+ bestExact.parsed;
+        }
+        //extent current word
+        Wrapper bestExtend=null;
+        if(validPartial){
+            bestExtend = parseWithWrapper(wordStart, wordEnd+1, cache);
+        }
+        //find best
+        Wrapper best=Wrapper.min(bestExact, bestExtend);
+        cache.put(wordStart, (Wrapper)best.clone());
+        return best;
+    }
     /******17.14 parse string with minimum unrecognized characters********/
 }
