@@ -3,8 +3,15 @@ package wang.c18;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import wang.utility.SuffixTree;
 
@@ -30,6 +37,22 @@ public class Questions {
 
         SuffixTree tree=new SuffixTree("BIBS");
         System.out.println(tree.search("IB"));
+        
+        int arraySize=10;
+        int range=20;
+        maxHeapComparator=new MaxHeapComparator();
+        minHeapComparator=new MinHeapComparator();
+        maxHeap=new PriorityQueue<Integer>(arraySize-arraySize/2, maxHeapComparator);
+        minHeap=new PriorityQueue<Integer>(arraySize/2, minHeapComparator);
+        for(int i=0; i<arraySize; i++){
+            int randomNumber=(int)(Math.random() * (range+1) );
+            addNewNumberAndPrintMedian(randomNumber);
+        }
+        
+        String startWord="hit", stopWord="cog";
+        Set<String> dict=new HashSet<String>();
+        dict.add("HOT");dict.add("DOT");dict.add("DOG");dict.add("LOT");dict.add("LOG");
+        System.out.println(transform(startWord, stopWord, dict));
     }
 
     /*****18.1 add two numbers, not use + or any arithmetic operator*************/
@@ -333,7 +356,135 @@ public class Questions {
     /******18.8 given string s and an array of smaller strings T, search s for each small string in T************************/
 
     /******18.9 find and maintain the median value as new values generated**************/
-
+    static class MinHeapComparator implements Comparator<Integer>{
+    	public int compare(Integer o1, Integer o2){
+    		if(o1>o2) return 1;
+    		else if(o1==o2)return 0;
+    		else return -1;
+    	}
+    }
+    static class MaxHeapComparator implements Comparator<Integer>{
+    	public int compare(Integer o1, Integer o2){
+    		if(o1<o2)return 1;
+    		else if(o1==o2)return 0;
+    		else return -1;
+    	}
+    }
+      
+    private static Comparator<Integer> maxHeapComparator;
+    private static Comparator<Integer> minHeapComparator;
+    private static PriorityQueue<Integer> maxHeap; // sorted array left part
+    private static PriorityQueue<Integer> minHeap; // sorted array right part
+    //method below is to maintains maxHeap.size()>=minHeap.size()
+    static void addNewNumber(int randomNumber){
+        if(maxHeap.size()==minHeap.size()){
+            if(minHeap.peek() != null && randomNumber > minHeap.peek() ){
+                maxHeap.offer(minHeap.poll());
+                minHeap.offer(randomNumber);
+            }else{
+                maxHeap.offer(randomNumber);
+            }            
+        }else{
+            if(randomNumber < maxHeap.peek()){
+                minHeap.offer(maxHeap.poll());
+                maxHeap.offer(randomNumber);
+            }else{
+                minHeap.offer(randomNumber);
+            }            
+        }
+    }
+    //maxHeap is always at least as big as minHeap.
+    static double getMedian(){
+        if(maxHeap.isEmpty()){
+            return 0;
+        }
+        if(maxHeap.size() == minHeap.size() ){
+            return (minHeap.peek() + maxHeap.peek() )/2.0;
+        }else{
+            return maxHeap.peek();
+        }
+    }    
+    
+    static void addNewNumberAndPrintMedian(int randomNumber){
+        addNewNumber(randomNumber);
+        System.out.println("Random Number = "+randomNumber);
+        printMinHeapAndMaxHeap();
+        System.out.println("\nMedian = "+getMedian()+"\n");
+    }
+    static void printMinHeapAndMaxHeap(){
+        Integer[] minHeapArray=minHeap.toArray(new Integer[minHeap.size()]);
+        Integer[] maxHeapArray=maxHeap.toArray(new Integer[maxHeap.size()]);
+        Arrays.sort(minHeapArray, minHeapComparator);
+        Arrays.sort(maxHeapArray, maxHeapComparator);
+        System.out.print("MinHeap =");
+        for(int i=minHeapArray.length-1; i>=0; i--){
+            System.out.print(" "+minHeapArray[i]);
+        }
+        System.out.print("\nMaxHeap =");
+        for(int i=0; i<maxHeapArray.length; i++){
+            System.out.print(" "+maxHeapArray[i]);
+        }
+    }
     /******18.9 find and maintain the median value as new values generated**************/
 
+    /******18.10 Word Ladder. start:hit, end:cog, dict:hot,dot,dog,lot,log**************/
+    //BFS, level order
+    static LinkedList<String> transform(String startWord, String stopWord, Set<String> dictionary){
+        startWord=startWord.toUpperCase();
+        stopWord=stopWord.toUpperCase();
+        Queue<String> actionQueue=new LinkedList<String>();
+        Set<String> visitedSet=new HashSet<String>();
+        Map<String, String> backtrackMap=new TreeMap<String, String>();
+        
+        actionQueue.add(startWord);
+        visitedSet.add(startWord);
+        
+        while(! actionQueue.isEmpty()){
+            String w=actionQueue.poll();
+            //for each possible word v from w with one edit operation
+            for(String v: getOneEditWords(w)){
+                if(v.equals(stopWord)){
+                    //found out words. Now back track
+                    LinkedList<String> list=new LinkedList<String>();
+                    //append v to list
+                    list.add(v);
+                    while(w != null){
+                        list.add(0, w);
+                        w=backtrackMap.get(w);
+                    }
+                    return list;
+                }
+                //if v is a dictionary word
+                if(dictionary.contains(v)){
+                    if(! visitedSet.contains(v)){
+                        actionQueue.add(v);
+                        visitedSet.add(v);//mark visited
+                        backtrackMap.put(v, w);
+                    }
+                }
+            }
+        }
+        return null;        
+    }
+    
+    private static Set<String> getOneEditWords(String word){
+        Set<String> words=new TreeSet<String>();
+        //for every letter
+        for(int i=0; i<word.length(); i++){
+            char[] wordArray=word.toCharArray();
+            for(char c='A';c<='Z';c++){
+                if(c != word.charAt(i)){
+                    wordArray[i]=c;
+                    words.add(new String(wordArray));
+                }
+            }
+        }
+        return words;
+    }
+    /******18.10 Word Ladder. start:hit, end:cog, dict:hot,dot,dog,lot,log**************/
+    
+    /******18.11 find the maximum subsquare such that all four borders are filled with black pixels******/
+
+    /******18.11 find the maximum subsquare such that all four borders are filled with black pixels******/
+    
 }
