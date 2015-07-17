@@ -1,5 +1,6 @@
 package wang.c18;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -13,7 +14,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import wang.utility.SuffixTree;
+import wang.utility.ArrayUtility;
 
 public class Questions {
 
@@ -35,8 +36,8 @@ public class Questions {
         String[] strs={"a", "testingtester", "testing", "tester", "test", "er","e", "r", "abcdefghijklm", "abcdefg","hijklm"};
         System.out.println(getLongestWord(strs));
 
-        SuffixTree tree=new SuffixTree("BIBS");
-        System.out.println(tree.search("IB"));
+        SuffixTree tree=new SuffixTree("BIBSIBCIB");
+        System.out.println("SuffixTree: "+tree.search("IB"));
         
         int arraySize=10;
         int range=20;
@@ -53,6 +54,21 @@ public class Questions {
         Set<String> dict=new HashSet<String>();
         dict.add("HOT");dict.add("DOT");dict.add("DOG");dict.add("LOT");dict.add("LOG");
         System.out.println(transform(startWord, stopWord, dict));
+        
+        int[][] matrix=ArrayUtility.getInstance().randomMatrix(7, 7, 0, 1);
+        for(int i=0; i<matrix.length; i++){
+            for(int j=0; j<matrix[0].length; j++){
+                System.out.print(matrix[i][j]+"  ");
+            }
+            System.out.print("\n");
+        }
+        Subsquare square=findSquare(matrix);
+        square.print();
+        
+        int[] aaa={0,1,1,1,1,1,0,0,0,2,2,0,1,1};
+        sort012(aaa, 14);
+        System.out.println(Arrays.toString(aaa));
+        
     }
 
     /*****18.1 add two numbers, not use + or any arithmetic operator*************/
@@ -352,7 +368,62 @@ public class Questions {
     /******18.7 find the longest word made of any other words**************/
 
     /******18.8 given string s and an array of smaller strings T, search s for each small string in T************************/
-    //see suffix tree
+    private static class SuffixNode{
+        HashMap<Character, SuffixNode> lookup=new HashMap<Character, SuffixNode>();
+        char value;
+        ArrayList<Integer> indexes=new ArrayList<Integer>();
+        public SuffixNode(){}
+        
+        public void insert(String s, int index){
+            indexes.add(index);
+            
+            if(s !=null && s.length() > 0){
+                value=s.charAt(0);
+                SuffixNode child=null;
+                
+                if(lookup.containsKey(value)){
+                    child=lookup.get(value);
+                }else{
+                    child=new SuffixNode();
+                    lookup.put(value, child);
+                }
+                
+                String remaind=s.substring(1);
+                child.insert(remaind, index);
+            }
+        }
+        
+        public ArrayList<Integer> search(String s){
+            if(s==null || s.length() ==0 ){
+                return indexes;
+            }else{
+                char first=s.charAt(0);
+                if(lookup.containsKey(first)){
+                    return lookup.get(first).search(s.substring(1));
+                }
+            }
+            
+            return null;
+        }
+        
+    }
+    
+    private static class SuffixTree{
+        SuffixNode root=new SuffixNode();
+        
+        public SuffixTree(String s){
+            
+                for(int i=0; i<s.length(); i++){
+                    String suffix = s.substring(i);
+                    root.insert(suffix, i);
+                }
+           
+        }
+        
+        public ArrayList<Integer> search(String s){
+            return root.search(s);
+        }
+    }
     /******18.8 given string s and an array of smaller strings T, search s for each small string in T************************/
 
     /******18.9 find and maintain the median value as new values generated**************/
@@ -484,7 +555,180 @@ public class Questions {
     /******18.10 Word Ladder. start:hit, end:cog, dict:hot,dot,dog,lot,log**************/
     
     /******18.11 find the maximum subsquare such that all four borders are filled with black pixels******/
-
-    /******18.11 find the maximum subsquare such that all four borders are filled with black pixels******/
+    //method 1:
+    static class Subsquare{
+        public int row, column, size;
+        public Subsquare(int r, int c, int sz){
+            row=r; column=c; size=sz;
+        }
+        public void print(){
+            System.out.println("(" + row + ", " + column + ", " + size + ")");
+        }
+    }
+    static Subsquare findSquare(int[][] matrix){
+        int N=matrix.length;
+        
+        for(int i=N; i>=1; i--){
+            Subsquare square=findSquareWithSize(matrix, i);
+            if(square != null){
+                return square;
+            }
+        }
+        return null;        
+    }
+    private static Subsquare findSquareWithSize(int[][] matrix, int squareSize){
+        //On an edge of length N, there are (N-sz+1) squares of length sz.
+        int count=matrix.length - squareSize +1;
+        
+        //iterate through all squares with side length square_size
+        for(int row=0; row<count; row++){
+            for(int col=0; col<count; col++){
+                if(isSquare(matrix, row, col, squareSize) ){
+                    return new Subsquare(row, col, squareSize);
+                }
+            }
+        }
+        return null;
+    }
+    private static boolean isSquare(int[][] matrix, int row, int col, int size){
+        //check top and bottom border
+        for(int j=0; j<size;j++){
+            if(matrix[row][col+j]==1) return false;
+            if(matrix[row+size-1][col+j]==1) return false;
+        }
+        //check left and right border
+        for(int i=1; i<size-1; i++){
+            if(matrix[row+i][col]==1) return false;
+            if(matrix[row+i][col+size-1]==1) return false;
+        }
+        return true;
+    }
+    //method 2 efficient:
+    static class SquareCell{
+        public int zerosRight=0;
+        public int zerosBelow=0;
+        public SquareCell(int right, int below){
+            zerosRight=right;
+            zerosBelow=below;
+        }
+        public void setZerosRight(int right){
+            zerosRight=right;
+        }
+        public void setZerosBelow(int below){
+            zerosBelow=below;
+        }
+    }
+    static Subsquare findSquareWithSize(SquareCell[][] processed, int square_size) {
+        // On an edge of length N, there are (N - sz + 1) squares of length sz.
+        int count = processed.length - square_size + 1; 
+        
+        // Iterate through all squares with side length square_size.
+        for (int row = 0; row < count; row++) {
+            for (int col = 0; col < count; col++) {
+                if (isSquare(processed, row, col, square_size)) {
+                    return new Subsquare(row, col, square_size);
+                }
+            }
+        }
+        return null;
+    }
     
+    static Subsquare findSquare2(int[][] matrix){
+        assert(matrix.length > 0);
+        for (int row = 0; row < matrix.length; row++){
+            assert(matrix[row].length == matrix.length);
+        }
+        
+        SquareCell[][] processed = processSquare(matrix);
+        
+        int N = matrix.length;
+        
+        for (int i = N; i >= 1; i--) {
+            Subsquare square = findSquareWithSize(processed, i);
+            if (square != null) {
+                return square;
+            }
+        }
+        return null;
+    }   
+
+    private static boolean isSquare(SquareCell[][] matrix, int row, int col, int size) {
+        SquareCell topLeft = matrix[row][col];
+        SquareCell topRight = matrix[row][col + size - 1];
+        SquareCell bottomRight = matrix[row + size - 1][col];
+        if (topLeft.zerosRight < size) { // Check top edge
+            return false;
+        }
+        if (topLeft.zerosBelow < size) { // Check left edge
+            return false;
+        }
+        if (topRight.zerosBelow < size) { // Check right edge
+            return false;
+        }
+        if (bottomRight.zerosRight < size) { // Check bottom edge
+            return false;
+        }
+        return true;
+    }
+    
+    static SquareCell[][] processSquare(int[][] matrix) {
+        SquareCell[][] processed = new SquareCell[matrix.length][matrix.length];
+        
+        for (int r = matrix.length - 1; r >= 0; r--) {
+            for (int c = matrix.length - 1; c >= 0; c--) {
+                int rightZeros = 0;
+                int belowZeros = 0;
+                if (matrix[r][c] == 0) { // only need to process if it's a black cell
+                    rightZeros++;
+                    belowZeros++;
+                    if (c + 1 < matrix.length) { // next column over is on same row
+                        SquareCell previous = processed[r][c + 1];
+                        rightZeros += previous.zerosRight;
+                    }
+                    if (r + 1 < matrix.length) {
+                        SquareCell previous = processed[r + 1][c];
+                        belowZeros += previous.zerosBelow;
+                    }
+                }
+                processed[r][c] = new SquareCell(rightZeros, belowZeros);
+            }
+        }   
+        return processed;
+    }
+    /******18.11 find the maximum subsquare such that all four borders are filled with black pixels******/
+    static void sort012(int a[], int arr_size)
+    {
+        int lo = 0;
+        int hi = arr_size - 1;
+        int mid = 0;
+     
+        while (mid <= hi)
+        {
+            switch (a[mid])
+            {
+            case 0:
+                swapArr(a, lo++, mid++);
+                break;
+            case 1:
+                mid++;
+                break;
+            case 2:
+                swapArr(a, mid, hi--);
+                break;
+            }
+        }
+    }
+    
+    static void swapArr(int[] arr, int i, int j){
+        int temp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;
+    }
+    /******18.12 N*N matrix with positive and negative, find the submatrix with largest possible sum*************/
+    
+    /******18.12 N*N matrix with positive and negative, find the submatrix with largest possible sum*************/
+    
+    /******18. 13 create the largest rectangle of letters such that every row/column forms a word***********/
+
+    /******18. 13 create the largest rectangle of letters such that every row/column forms a word***********/
 }
