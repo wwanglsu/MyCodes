@@ -38,7 +38,7 @@ public class Questions {
 
         SuffixTree tree=new SuffixTree("BIBSIBCIB");
         System.out.println("SuffixTree: "+tree.search("IB"));
-        
+
         int arraySize=10;
         int range=20;
         maxHeapComparator=new MaxHeapComparator();
@@ -49,12 +49,12 @@ public class Questions {
             int randomNumber=(int)(Math.random() * (range+1) );
             addNewNumberAndPrintMedian(randomNumber);
         }
-        
+
         String startWord="hit", stopWord="cog";
         Set<String> dict=new HashSet<String>();
         dict.add("HOT");dict.add("DOT");dict.add("DOG");dict.add("LOT");dict.add("LOG");
         System.out.println(transform(startWord, stopWord, dict));
-        
+
         int[][] matrix=ArrayUtility.getInstance().randomMatrix(7, 7, 0, 1);
         for(int i=0; i<matrix.length; i++){
             for(int j=0; j<matrix[0].length; j++){
@@ -64,11 +64,11 @@ public class Questions {
         }
         Subsquare square=findSquare(matrix);
         square.print();
-        
+
         int[] aaa={0,1,1,1,1,1,0,0,0,2,2,0,1,1};
         sort012(aaa, 14);
         System.out.println(Arrays.toString(aaa));
-        
+
     }
 
     /*****18.1 add two numbers, not use + or any arithmetic operator*************/
@@ -373,26 +373,26 @@ public class Questions {
         char value;
         ArrayList<Integer> indexes=new ArrayList<Integer>();
         public SuffixNode(){}
-        
+
         public void insert(String s, int index){
             indexes.add(index);
-            
+
             if(s !=null && s.length() > 0){
                 value=s.charAt(0);
                 SuffixNode child=null;
-                
+
                 if(lookup.containsKey(value)){
                     child=lookup.get(value);
                 }else{
                     child=new SuffixNode();
                     lookup.put(value, child);
                 }
-                
+
                 String remaind=s.substring(1);
                 child.insert(remaind, index);
             }
         }
-        
+
         public ArrayList<Integer> search(String s){
             if(s==null || s.length() ==0 ){
                 return indexes;
@@ -402,24 +402,24 @@ public class Questions {
                     return lookup.get(first).search(s.substring(1));
                 }
             }
-            
+
             return null;
         }
-        
+
     }
-    
+
     private static class SuffixTree{
         SuffixNode root=new SuffixNode();
-        
+
         public SuffixTree(String s){
-            
-                for(int i=0; i<s.length(); i++){
-                    String suffix = s.substring(i);
-                    root.insert(suffix, i);
-                }
-           
+
+            for(int i=0; i<s.length(); i++){
+                String suffix = s.substring(i);
+                root.insert(suffix, i);
+            }
+
         }
-        
+
         public ArrayList<Integer> search(String s){
             return root.search(s);
         }
@@ -428,20 +428,30 @@ public class Questions {
 
     /******18.9 find and maintain the median value as new values generated**************/
     static class MinHeapComparator implements Comparator<Integer>{
-    	public int compare(Integer o1, Integer o2){
-    		if(o1>o2) return 1;
-    		else if(o1==o2)return 0;
-    		else return -1;
-    	}
+        @Override
+        public int compare(Integer o1, Integer o2){
+            if(o1>o2) {
+                return 1;
+            } else if(o1==o2) {
+                return 0;
+            } else {
+                return -1;
+            }
+        }
     }
     static class MaxHeapComparator implements Comparator<Integer>{
-    	public int compare(Integer o1, Integer o2){
-    		if(o1<o2)return 1;
-    		else if(o1==o2)return 0;
-    		else return -1;
-    	}
+        @Override
+        public int compare(Integer o1, Integer o2){
+            if(o1<o2) {
+                return 1;
+            } else if(o1==o2) {
+                return 0;
+            } else {
+                return -1;
+            }
+        }
     }
-      
+
     private static Comparator<Integer> maxHeapComparator;
     private static Comparator<Integer> minHeapComparator;
     private static PriorityQueue<Integer> maxHeap; // sorted array left part
@@ -475,7 +485,7 @@ public class Questions {
             return maxHeap.peek();
         }
     }    
-    
+
     static void addNewNumberAndPrintMedian(int randomNumber){
         addNewNumber(randomNumber);
         System.out.println("Random Number = "+randomNumber);
@@ -506,10 +516,10 @@ public class Questions {
         Queue<String> actionQueue=new LinkedList<String>();
         Set<String> visitedSet=new HashSet<String>();
         Map<String, String> backtrackMap=new TreeMap<String, String>();
-        
+
         actionQueue.add(startWord);
         visitedSet.add(startWord);
-        
+
         while(! actionQueue.isEmpty()){
             String w=actionQueue.poll();
             //for each possible word v from w with one edit operation
@@ -537,7 +547,7 @@ public class Questions {
         }
         return null;        
     }
-    
+
     private static Set<String> getOneEditWords(String word){
         Set<String> words=new TreeSet<String>();
         //for every letter
@@ -553,7 +563,7 @@ public class Questions {
         return words;
     }
     /******18.10 Word Ladder. start:hit, end:cog, dict:hot,dot,dog,lot,log**************/
-    
+
     /******18.11 find the maximum subsquare such that all four borders are filled with black pixels******/
     //method 1:
     static class Subsquare{
@@ -567,7 +577,7 @@ public class Questions {
     }
     static Subsquare findSquare(int[][] matrix){
         int N=matrix.length;
-        
+
         for(int i=N; i>=1; i--){
             Subsquare square=findSquareWithSize(matrix, i);
             if(square != null){
@@ -579,7 +589,7 @@ public class Questions {
     private static Subsquare findSquareWithSize(int[][] matrix, int squareSize){
         //On an edge of length N, there are (N-sz+1) squares of length sz.
         int count=matrix.length - squareSize +1;
-        
+
         //iterate through all squares with side length square_size
         for(int row=0; row<count; row++){
             for(int col=0; col<count; col++){
@@ -593,13 +603,21 @@ public class Questions {
     private static boolean isSquare(int[][] matrix, int row, int col, int size){
         //check top and bottom border
         for(int j=0; j<size;j++){
-            if(matrix[row][col+j]==1) return false;
-            if(matrix[row+size-1][col+j]==1) return false;
+            if(matrix[row][col+j]==1) {
+                return false;
+            }
+            if(matrix[row+size-1][col+j]==1) {
+                return false;
+            }
         }
         //check left and right border
         for(int i=1; i<size-1; i++){
-            if(matrix[row+i][col]==1) return false;
-            if(matrix[row+i][col+size-1]==1) return false;
+            if(matrix[row+i][col]==1) {
+                return false;
+            }
+            if(matrix[row+i][col+size-1]==1) {
+                return false;
+            }
         }
         return true;
     }
@@ -621,7 +639,7 @@ public class Questions {
     static Subsquare findSquareWithSize(SquareCell[][] processed, int square_size) {
         // On an edge of length N, there are (N - sz + 1) squares of length sz.
         int count = processed.length - square_size + 1; 
-        
+
         // Iterate through all squares with side length square_size.
         for (int row = 0; row < count; row++) {
             for (int col = 0; col < count; col++) {
@@ -632,17 +650,17 @@ public class Questions {
         }
         return null;
     }
-    
+
     static Subsquare findSquare2(int[][] matrix){
         assert(matrix.length > 0);
         for (int row = 0; row < matrix.length; row++){
             assert(matrix[row].length == matrix.length);
         }
-        
+
         SquareCell[][] processed = processSquare(matrix);
-        
+
         int N = matrix.length;
-        
+
         for (int i = N; i >= 1; i--) {
             Subsquare square = findSquareWithSize(processed, i);
             if (square != null) {
@@ -670,10 +688,10 @@ public class Questions {
         }
         return true;
     }
-    
+
     static SquareCell[][] processSquare(int[][] matrix) {
         SquareCell[][] processed = new SquareCell[matrix.length][matrix.length];
-        
+
         for (int r = matrix.length - 1; r >= 0; r--) {
             for (int c = matrix.length - 1; c >= 0; c--) {
                 int rightZeros = 0;
@@ -701,33 +719,35 @@ public class Questions {
         int lo = 0;
         int hi = arr_size - 1;
         int mid = 0;
-     
+
         while (mid <= hi)
         {
             switch (a[mid])
             {
-            case 0:
-                swapArr(a, lo++, mid++);
-                break;
-            case 1:
-                mid++;
-                break;
-            case 2:
-                swapArr(a, mid, hi--);
-                break;
+                case 0:
+                    swapArr(a, lo++, mid++);
+                    break;
+                case 1:
+                    mid++;
+                    break;
+                case 2:
+                    swapArr(a, mid, hi--);
+                    break;
             }
         }
     }
-    
+
     static void swapArr(int[] arr, int i, int j){
         int temp=arr[i];
         arr[i]=arr[j];
         arr[j]=temp;
     }
     /******18.12 N*N matrix with positive and negative, find the submatrix with largest possible sum*************/
-    
+    static void findMaxSubMatrix(){
+
+    }
     /******18.12 N*N matrix with positive and negative, find the submatrix with largest possible sum*************/
-    
+
     /******18. 13 create the largest rectangle of letters such that every row/column forms a word***********/
 
     /******18. 13 create the largest rectangle of letters such that every row/column forms a word***********/
