@@ -751,6 +751,10 @@ public class Questions {
 
 
     }
+
+    static void isSquare(){
+
+    }
     /******18.12 N*N matrix with positive and negative, find the submatrix with largest possible sum*************/
 
     /******18. 13 create the largest rectangle of letters such that every row/column forms a word***********/
