@@ -55,12 +55,12 @@ public class ProducerConsumer_BlockingQueue_Demo {
     private static void consumer() throws InterruptedException{
         Random random = new Random();
         while(true){
-            //Thread.sleep(100);
+            Thread.sleep(100);
 
-            //if(random.nextInt(10)==0){
-            Integer value = queue.take();
-            System.out.println("Taken value: " + value + "; Queue size is: " +queue.size());
-            //}
+            if(random.nextInt(10)==0){
+                Integer value = queue.take();
+                System.out.println("Taken value: " + value + "; Queue size is: " +queue.size());
+            }
 
         }
     }
