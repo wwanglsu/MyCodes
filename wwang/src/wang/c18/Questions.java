@@ -743,6 +743,7 @@ public class Questions {
         arr[j]=temp;
     }
     /******18.12 N*N matrix with positive and negative, find the submatrix with largest possible sum*************/
+	//brute force O(N^6): we iterate through O(N^4) submatrices and it takes O(N^2) time to compute the area of each.
     static void findMaxSubMatrix(){
 
     }
@@ -755,6 +756,7 @@ public class Questions {
     static void isSquare(){
 
     }
+    
     
     /******18.12 N*N matrix with positive and negative, find the submatrix with largest possible sum*************/
 
