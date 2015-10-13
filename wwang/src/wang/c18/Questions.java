@@ -68,6 +68,9 @@ public class Questions {
         int[] aaa={0,1,1,1,1,1,0,0,0,2,2,0,1,1};
         sort012(aaa, 14);
         System.out.println(Arrays.toString(aaa));
+        
+        int[][] amatrix={{2,-1,3},{1,4,2},{0,5,3}};
+        System.out.println("SubMatrix with largest sum: "+getMaxMatrix(amatrix));
 
     }
 
@@ -744,20 +747,57 @@ public class Questions {
     }
     /******18.12 N*N matrix with positive and negative, find the submatrix with largest possible sum*************/
 	//brute force O(N^6): we iterate through O(N^4) submatrices and it takes O(N^2) time to compute the area of each.
-    static void findMaxSubMatrix(){
-
-    }
-
-    private class SubSquare{
-
-
-    }
-
-    static void isSquare(){
-
+    //DP O(N^4) solution 1
+    static int getMaxMatrix(int[][] original){
+        int maxArea=Integer.MIN_VALUE;
+        int rowCount=original.length;
+        int columnCount=original[0].length;
+        int[][] matrix=precomputeMatrix(original);
+        for(int row1=0; row1<rowCount;row1++){
+            for(int row2=row1; row2<rowCount;row2++){
+                for(int col1=0; col1<columnCount;col1++){
+                    for(int col2=col1; col2<columnCount;col2++){
+                        int sum=computeSum(matrix, row1, row2, col1, col2);
+                        if(sum>maxArea){
+                            System.out.println("New Max of " + sum + ": (rows " + row1 + " to " + row2 + ") and (columns " + col1 + " to " + col2 + ")");
+                            maxArea=sum;
+                        }
+                    }
+                }
+            }
+        }
+        return maxArea;
     }
     
+    private static int[][] precomputeMatrix(int[][] matrix){
+        int[][] sumMatrix=new int[matrix.length][matrix[0].length];
+        for(int i=0; i<matrix.length; i++){
+            for(int j=0; j<matrix.length; j++){
+                if(i==0 && j==0){//first cell
+                    sumMatrix[i][j]=matrix[i][j];
+                }else if(j==0){//cell in first column
+                    sumMatrix[i][j]=sumMatrix[i-1][j]+matrix[i][j];
+                }else if(i==0){//cell in first row
+                    sumMatrix[i][j]=sumMatrix[i][j-1]+matrix[i][j];
+                }else{
+                    sumMatrix[i][j]=sumMatrix [i-1][j]+sumMatrix[i][j-1]-sumMatrix[i-1][j-1]+matrix[i][j];
+                }
+            }
+        }
+        return sumMatrix;
+    }
     
+    private static int computeSum(int[][] sumMatrix, int row1, int row2, int col1, int col2){
+        if(row1==0 && col1==0){//starts at row0 and column0
+            return sumMatrix[row2][col2];
+        }else if(row1==0){//starts at row0
+            return sumMatrix[row2][col2]-sumMatrix[row2][col1-1];
+        }else if(col1==0){//starts at column0
+            return sumMatrix[row2][col2]-sumMatrix[row1-1][col2];
+        }else{
+            return sumMatrix[row2][col2]-sumMatrix[row2][col1-1]-sumMatrix[row1-1][col2]+sumMatrix[row1-1][col1-1];
+        }
+    }
     /******18.12 N*N matrix with positive and negative, find the submatrix with largest possible sum*************/
 
     /******18. 13 create the largest rectangle of letters such that every row/column forms a word***********/
