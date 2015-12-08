@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>_shortcuts</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>server.xml</name>
+			<type>1</type>
+			<locationURI>CATALINA_HOME/conf/server.xml</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>CATALINA_HOME</name>
+			<value>file:/C:/myfolder/apache-tomcat-7.0.65</value>
+		</variable>
+	</variableList>
+</projectDescription>
