@@ -4840,3 +4840,233 @@ java.io.IOException: File not found: C:\myfolder\apache-tomcat-7.0.65\conf\serve
 
 !ENTRY org.eclipse.jdt.core 4 0 2015-12-07 14:45:37.960
 !MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\version.sh
+
+!ENTRY org.eclipse.wst.jsdt.core 4 969 2015-12-07 23:33:42.027
+!MESSAGE myApp.js [in  [in C:\myfolder\gitRepository\MyCodes\mars\.metadata\.plugins\org.eclipse.wst.jsdt.core\libraries\system.js]] does not exist
+
+!ENTRY org.eclipse.wst.jsdt.core 4 969 2015-12-07 23:33:45.783
+!MESSAGE myApp.js [in  [in C:\myfolder\gitRepository\MyCodes\mars\.metadata\.plugins\org.eclipse.wst.jsdt.core\libraries\system.js]] does not exist
+!SESSION 2015-12-08 20:49:43.305 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_60
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-12-08 20:49:59.753
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\wwang'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.core.net 4 0 2015-12-08 20:49:59.972
+!MESSAGE WinHttp.GetProxyForUrl for pac failed with error 'The proxy auto-configuration script could not be downloaded
+' #12167.
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.125
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\catalina-tasks.xml
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.274
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\catalina.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.321
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\catalina.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.370
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\commons-daemon-native.tar.gz
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.420
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\configtest.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.463
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\configtest.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.514
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\daemon.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.561
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\digest.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.651
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\digest.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.708
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\service.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.752
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\setclasspath.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.796
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\setclasspath.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.848
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\shutdown.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.893
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\shutdown.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:42.941
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\startup.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:43.001
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\startup.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:43.047
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\tcnative-1.dll
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:43.095
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\tomcat-native.tar.gz
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:43.163
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\tomcat7.exe
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:43.208
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\tomcat7w.exe
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:43.253
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\tool-wrapper.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:43.315
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\tool-wrapper.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:43.373
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\version.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 20:50:43.418
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\version.sh
+!SESSION 2015-12-08 21:36:21.408 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_60
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.core.net 4 0 2015-12-08 21:36:33.108
+!MESSAGE WinHttp.GetProxyForUrl for pac failed with error 'The proxy auto-configuration script could not be downloaded
+' #12167.
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-12-08 21:36:33.561
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\wwang'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.154
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\catalina-tasks.xml
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.280
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\catalina.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.328
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\catalina.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.383
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\commons-daemon-native.tar.gz
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.431
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\configtest.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.479
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\configtest.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.525
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\daemon.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.571
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\digest.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.618
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\digest.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.666
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\service.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.715
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\setclasspath.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.763
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\setclasspath.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.809
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\shutdown.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.855
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\shutdown.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.902
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\startup.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.949
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\startup.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:17.997
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\tcnative-1.dll
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:18.045
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\tomcat-native.tar.gz
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:18.091
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\tomcat7.exe
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:18.138
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\tomcat7w.exe
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:18.184
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\tool-wrapper.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:18.230
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\tool-wrapper.sh
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:18.276
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\version.bat
+
+!ENTRY org.eclipse.jdt.core 4 0 2015-12-08 21:38:18.363
+!MESSAGE Invalid ZIP archive: C:\myfolder\apache-tomcat-7.0.65\bin\version.sh
+
+!ENTRY org.eclipse.wst.jsdt.core 4 969 2015-12-09 03:06:16.597
+!MESSAGE myApp.js [in  [in C:\myfolder\gitRepository\MyCodes\mars\.metadata\.plugins\org.eclipse.wst.jsdt.core\libraries\system.js]] does not exist
+
+!ENTRY org.eclipse.epp.logging.aeri.ui 2 26 2015-12-09 03:06:16.778
+!MESSAGE Status index is not available. Version: 1.0.1.v20150913-0716
+!STACK 0
+org.apache.lucene.util.ThreadInterruptedException: java.lang.InterruptedException: sleep interrupted
+	at org.apache.lucene.index.SegmentInfos$FindSegmentsFile.run(SegmentInfos.java:696)
+	at org.apache.lucene.index.SegmentInfos$FindSegmentsFile.run(SegmentInfos.java:593)
+	at org.apache.lucene.index.SegmentInfos.read(SegmentInfos.java:359)
+	at org.apache.lucene.index.SegmentInfos.readCurrentVersion(SegmentInfos.java:480)
+	at org.apache.lucene.index.DirectoryReader.isCurrent(DirectoryReader.java:901)
+	at org.apache.lucene.index.DirectoryReader.doOpenNoWriter(DirectoryReader.java:471)
+	at org.apache.lucene.index.DirectoryReader.doOpenIfChanged(DirectoryReader.java:450)
+	at org.apache.lucene.index.DirectoryReader.doOpenIfChanged(DirectoryReader.java:391)
+	at org.apache.lucene.index.IndexReader.openIfChanged(IndexReader.java:497)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ProblemsDatabaseService.renewReaderAndSearcher(ProblemsDatabaseService.java:157)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ProblemsDatabaseService.seen(ProblemsDatabaseService.java:78)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ProblemsDatabaseService.seen(ProblemsDatabaseService.java:73)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ReportPredicates$ProblemDatabaseIgnoredPredicate.apply(ReportPredicates.java:50)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ReportPredicates$ProblemDatabaseIgnoredPredicate.apply(ReportPredicates.java:1)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.PredicateDebugDecorator.apply(PredicateDebugDecorator.java:40)
+	at com.google.common.base.Predicates$AndPredicate.apply(Predicates.java:343)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.LogListener.logging(LogListener.java:118)
+	at org.eclipse.core.internal.runtime.RuntimeLog.logToListeners(RuntimeLog.java:161)
+	at org.eclipse.core.internal.runtime.PlatformLogWriter.logged(PlatformLogWriter.java:103)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.safeLogged(ExtendedLogReaderServiceFactory.java:88)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.logPrivileged(ExtendedLogReaderServiceFactory.java:217)
+	at org.eclipse.osgi.internal.log.ExtendedLogReaderServiceFactory.log(ExtendedLogReaderServiceFactory.java:189)
+	at org.eclipse.osgi.internal.log.ExtendedLogServiceFactory.log(ExtendedLogServiceFactory.java:65)
+	at org.eclipse.osgi.internal.log.ExtendedLogServiceImpl.log(ExtendedLogServiceImpl.java:87)
+	at org.eclipse.osgi.internal.log.LoggerImpl.log(LoggerImpl.java:54)
+	at org.eclipse.core.internal.runtime.Log.log(Log.java:65)
+	at org.eclipse.wst.jsdt.internal.ui.JavaScriptPlugin.log(JavaScriptPlugin.java:264)
+	at org.eclipse.wst.jsdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:220)
+	at org.eclipse.wst.jsdt.internal.ui.text.java.hover.AbstractJavaEditorTextHover.getHoverInfo(AbstractJavaEditorTextHover.java:116)
+	at org.eclipse.wst.jsdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo(BestMatchHover.java:99)
+	at org.eclipse.wst.jsdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo(JavaEditorTextHoverProxy.java:67)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:168)
+Caused by: java.lang.InterruptedException: sleep interrupted
+	at java.lang.Thread.sleep(Native Method)
+	at org.apache.lucene.index.SegmentInfos$FindSegmentsFile.run(SegmentInfos.java:694)
+	... 31 more
