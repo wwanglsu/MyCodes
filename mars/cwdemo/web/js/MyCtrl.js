@@ -3,7 +3,7 @@
 app.controller('MyCtrl', ['$scope', '$state', 'Page',
   function MyCtrl($scope, $state, Page) {
 
-	$scope.Page = Page;
+	$scope.$Page = Page;
 	
     $scope.home = function() {
       $state.go('home').then(function() {
@@ -18,6 +18,22 @@ app.controller('MyCtrl', ['$scope', '$state', 'Page',
     	  $('body').toggleClass('pushed-right');
           $('#navbar').toggleClass('in');
           Page.setTitle('About');
+      });
+    };
+    
+    $scope.contact = function() {
+        $state.go('contact').then(function() {
+      	  $('body').toggleClass('pushed-right');
+            $('#navbar').toggleClass('in');
+            Page.setTitle('Contact');
+        });
+    };
+      
+    $scope.search = function() {
+      $state.go('search').then(function() {
+    	  $('body').toggleClass('pushed-right');
+          $('#navbar').toggleClass('in');
+          Page.setTitle('Search');
       });
     };
 

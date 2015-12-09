@@ -22,6 +22,20 @@ app.config(['$stateProvider', '$urlRouterProvider',
             pageTitle: 'About'
           }
         })
+        .state('contact', {
+          url: '/contact',
+          templateUrl: 'partials/contact.html',
+          data: {
+            pageTitle: 'Contact'
+          }
+        })
+        .state('search', {
+          url: '/search',
+          templateUrl: 'partials/search.html',
+          data: {
+            pageTitle: 'Search'
+          }
+        })
         .state('login', {
           url: '/login',
           templateUrl: 'partials/login.html',
@@ -54,7 +68,7 @@ app.directive('updateTitle', ['$rootScope', '$timeout',
       }
 ]);
 
-//create service: Page and modify from controllers.
+//create service: Page to modify from controllers.
 app.factory('Page', function(){
 	  var title = 'Home';
 	  return {

@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title >{{ Page.title()}}</title>
+    <title >{{ $Page.title()}}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -41,9 +41,9 @@
 	            <ul class="nav navbar-nav">
 	              <li class="active"><a href="" ng-click="home()">Home</a></li>
 	              <li><a href="" ng-click="about()">About</a></li>
-	              <li><a href="#">Contact</a></li>
+	              <li><a href="" ng-click="contact()">Contact</a></li>
 	              <li class="dropdown">
-	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Products <span class="caret"></span></a>
 	                <ul class="dropdown-menu" role="menu">
 	                  <li><a href="#">AA</a></li>
 	                  <li><a href="#">BB</a></li>
@@ -56,7 +56,7 @@
 	              </li>
 	            </ul>
 	            <ul class="nav navbar-nav navbar-right">
-	              <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
+	              <li><a href="" ng-click="search()">Search <span class="sr-only">(current)</span></a></li>
 	              <li><a href="" ng-click="login()">Log In</a></li>
 	            </ul>
 	          </div><!--/.nav-collapse -->
@@ -75,5 +75,22 @@
 	<script src="js/angular-ui-router.min.js"></script>
 	<script src="js/myApp.js"></script>
 	<script src="js/MyCtrl.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#navbar li a').click(function(e) {				
+		        $('#navbar li').removeClass('active');
+		        var $parent = $(this).parent();
+		        if (!$parent.hasClass('active')) {
+		            $parent.addClass('active');
+		        }
+		        e.preventDefault();
+		    });
+			
+			
+			
+			
+		});
+		
+	</script>
   </body>
 </html>
