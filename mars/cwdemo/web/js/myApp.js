@@ -5,37 +5,31 @@ var app = angular.module('myApp', ['ui.router']);
 app.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
 
-      $urlRouterProvider.otherwise('/home');
+      $urlRouterProvider.otherwise('/');
 
       $stateProvider
         .state('home', {
           url: '/',
-          templateUrl: 'index.html',
+          templateUrl: 'partials/home.html',
           data: {
-            pageTitle: 'Canvas World'
+            pageTitle: 'Home'
           }
         })
         .state('about', {
           url: '/about',
-          templateUrl: 'partials/left-sidebar.html',
+          templateUrl: 'partials/about.html',
           data: {
-            pageTitle: 'Left'
+            pageTitle: 'About'
           }
         })
-        .state('credits', {
-          url: '/credits',
-          templateUrl: 'partials/main-info.html',
+        .state('login', {
+          url: '/login',
+          templateUrl: 'partials/login.html',
           data: {
-            pageTitle: 'Right Main'
-          }
-        })
-        .state('index', {
-        url: '',
-        templateUrl: '',
-        data: {
-          pageTitle: 'Home'
-        }
-      });
+            pageTitle: 'Log In'
+          },
+          controller: 'LogInController'
+        });
     }
 ]);
 
@@ -46,7 +40,7 @@ app.directive('updateTitle', ['$rootScope', '$timeout',
 
             var listener = function(event, toState) {
 
-              var title = 'Default Title';
+              var title = 'Home';
               if (toState.data && toState.data.pageTitle) title = toState.data.pageTitle;
 
               $timeout(function() {
@@ -59,3 +53,12 @@ app.directive('updateTitle', ['$rootScope', '$timeout',
         };
       }
 ]);
+
+//create service: Page and modify from controllers.
+app.factory('Page', function(){
+	  var title = 'Home';
+	  return {
+	    title: function() { return title; },
+	    setTitle: function(newTitle) { title = newTitle; }
+	  };
+	});
