@@ -1,0 +1,33 @@
+console.clear();
+
+var app = angular.module('myApp', ['ui.router']);
+
+app.config(['$stateProvider', '$urlRouterProvider',
+    function($stateProvider, $urlRouterProvider) {
+
+      $urlRouterProvider.otherwise('/home');
+
+      $stateProvider
+        .state('home', {
+          url: '/home',
+          templateUrl: 'home.html',
+          data: {
+            pageTitle: 'Home'
+          }
+        })
+        .state('about', {
+          url: '/about',
+          templateUrl: 'about.html',
+          data: {
+            pageTitle: 'About'
+          }
+        })
+        .state('credits', {
+          url: '/credits',
+          templateUrl: 'credits.html',
+          data: {
+            pageTitle: 'Credits'
+          }
+        });
+    }
+]);
