@@ -11533,3 +11533,9 @@ java.io.FileNotFoundException: C:\myfolder\gitRepository\MyCodes\mars\angular-ja
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2015-12-11 01:59:11.261
 !MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2015-12-11 02:09:24.610
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2015-12-11 02:09:24.721
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!

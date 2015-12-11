@@ -56,12 +56,14 @@
 	</section>
 	<section name="wizardPage">
 		<list key="groupId">
+			<item value="angular-jaxrs-demo"/>
 			<item value="CrunchifyRESTJerseyExample"/>
 			<item value="restdemo"/>
 		</list>
 		<list key="name">
 		</list>
 		<list key="artifactId">
+			<item value="angular-jaxrs-demo"/>
 			<item value="CrunchifyRESTJerseyExample"/>
 			<item value="restdemo"/>
 		</list>

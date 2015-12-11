@@ -4662,3 +4662,7 @@ org.eclipse.core.runtime.CoreException: Launch configuration restdemo references
 2015-12-11 01:59:11,249 [Worker-53] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\myfolder\gitRepository\MyCodes\mars\angular-jaxrs-demo\src\main\resources
 2015-12-11 01:59:11,255 [Worker-53] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2015-12-11 01:59:11,539 [Worker-53] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\myfolder\gitRepository\MyCodes\mars\angular-jaxrs-demo\src\test\resources
+2015-12-11 02:09:24,609 [Worker-46] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-12-11 02:09:24,716 [Worker-46] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\myfolder\gitRepository\MyCodes\mars\angular-jaxrs-demo\src\main\resources
+2015-12-11 02:09:24,719 [Worker-46] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-12-11 02:09:24,824 [Worker-46] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\myfolder\gitRepository\MyCodes\mars\angular-jaxrs-demo\src\test\resources
