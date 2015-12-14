@@ -8,6 +8,9 @@ import javax.ws.rs.core.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.jdjsoftware.dao.*;
+import java.sql.*;
+
 @Path("/ftocservice")
 public class FtoCService {
  
@@ -24,6 +27,7 @@ public class FtoCService {
 		//"@Produces(\"application/json\") Output: \n\nF to C Converter Output: \n\n"
 		String result = jsonObject.toString();
 		return Response.status(200).entity(result).build();
+		
 	  }
  
 	  @Path("{f}")

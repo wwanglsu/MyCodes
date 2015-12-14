@@ -24,6 +24,14 @@ app.config(['$stateProvider', '$urlRouterProvider',
           },
           controller: 'getWeatherController'
         })
+        .state('converters', {
+          url: '/converters',
+          templateUrl: 'partials/converters.html',
+          data: {
+            pageTitle: 'Converters'
+          },
+          controller: 'getWeatherController'
+        })
         .state('contact', {
           url: '/contact',
           templateUrl: 'partials/contact.html',

@@ -21,6 +21,14 @@ app.controller('MyCtrl', ['$scope', '$state', 'Page',
       });
     };
     
+    $scope.converters = function() {
+        $state.go('converters').then(function() {
+      	  $('body').toggleClass('pushed-right');
+            $('#navbar').toggleClass('in');
+            Page.setTitle('Converters');
+        });
+      };
+    
     $scope.contact = function() {
         $state.go('contact').then(function() {
       	  $('body').toggleClass('pushed-right');
@@ -47,14 +55,43 @@ app.controller('MyCtrl', ['$scope', '$state', 'Page',
   }
 ]);
 
-app.controller('LogInController', ['$scope', '$state', 'Page',
-  function LogInController($scope, $state, Page) {
-	Page.setTitle('Log In');
+app.controller('LogInController', ['$scope', '$http',
+  function LogInController($scope, $http) {
+	
+	$scope.validated = false;
+	
+	$scope.validateUser = function(){	
+		
+		$http.get(wsHostUrl + "webapi/validateuser/"+$scope.username+"/"+$scope.password)
+	    .then(function(response) {
+	    	$scope.result = JSON.stringify(response.data);
+	    	$scope.validated = response.data;
+	    	console.log(response.data);
+	    	//alert("test");
+    	});
+	}
+	
   }
 ]);
 
 app.controller('getWeatherController', function($scope, $http) {
-	var num = $scope.inputNum;
-    $http.get(wsHostUrl + "webapi/ftocservice/")
-    .then(function(response) {$scope.result = response.celsius;});
+	
+	$scope.checked = false;
+	
+	$scope.calculate = function(){	
+		var num = $scope.inputNum;
+		if(num == undefined || num == ""){
+			num = "";
+		}
+		num = "";
+		$http.get(wsHostUrl + "webapi/ftocservice/"+num)
+	    .then(function(response) {
+	    	$scope.result = JSON.stringify(response.data);
+	    	$scope.checked = true;
+	    	console.log(response);
+	    	//alert("test");
+    	});
+	}
+    
+    
 });
