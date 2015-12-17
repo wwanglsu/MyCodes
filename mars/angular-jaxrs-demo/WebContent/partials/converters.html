@@ -1,0 +1,16 @@
+<div ng-controller="getWeatherController">
+	<div class="jumbotron" >
+		<h1>Converters Tool:</h1>
+	<span>
+		This is a rich tool to provide information for you:
+	</span>
+	<br><br>
+	<span>Convert fahrenheit to celsius:</span><br>
+	<input type="text" ng-model="inputNum" placeholder="Enter fahrenheit here" />
+	<input type="button" value="Calculate" ng-click="calculate()">
+	<br>
+	<span style="background-color:yellow" ng-if="checked" ng-model="result">
+		{{("Celsius: " + result)}}
+	</span>
+	</div>
+</div>
