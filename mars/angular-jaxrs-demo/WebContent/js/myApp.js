@@ -3,6 +3,14 @@ console.clear();
 var app = angular.module('myApp', ['ui.router']);
 var wsHostUrl = "http://localhost:8080/angular-jaxrs-demo/";
 
+/* calling order:
+    1 app.config();
+    2 app.run();
+    3 directive's compile functions (if they are found in the dom)
+    4 app.controller()
+    5 directive's link functions (again, if found)  
+*/
+
 app.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
 
@@ -21,16 +29,14 @@ app.config(['$stateProvider', '$urlRouterProvider',
           templateUrl: 'partials/about.html',
           data: {
             pageTitle: 'About'
-          },
-          controller: 'getWeatherController'
+          }          
         })
         .state('converters', {
           url: '/converters',
           templateUrl: 'partials/converters.html',
           data: {
             pageTitle: 'Converters'
-          },
-          controller: 'getWeatherController'
+          }
         })
         .state('contact', {
           url: '/contact',
@@ -51,8 +57,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
           templateUrl: 'partials/login.html',
           data: {
             pageTitle: 'Log In'
-          },
-          controller: 'LogInController'
+          }
         });
     }
 ]);

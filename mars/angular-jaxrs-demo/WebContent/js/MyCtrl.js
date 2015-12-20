@@ -1,7 +1,7 @@
 //AngularJS Controller.
 
-app.controller('MyCtrl', ['$scope', '$state', 'Page',
-  function MyCtrl($scope, $state, Page) {
+app.controller('MyCtrl', ['$rootScope', '$scope', '$state', 'Page',
+  function MyCtrl($rootScope, $scope, $state, Page) {
 
 	$scope.$Page = Page;
 	
@@ -9,7 +9,7 @@ app.controller('MyCtrl', ['$scope', '$state', 'Page',
       $state.go('home').then(function() {
     	  $('body').toggleClass('pushed-right');
           $('#navbar').toggleClass('in');
-          Page.setTitle('Home');
+          //Page.setTitle('Home');
       });
     };
 
@@ -17,7 +17,7 @@ app.controller('MyCtrl', ['$scope', '$state', 'Page',
       $state.go('about').then(function() {
     	  $('body').toggleClass('pushed-right');
           $('#navbar').toggleClass('in');
-          Page.setTitle('About');
+          //Page.setTitle('About');
       });
     };
     
@@ -25,7 +25,7 @@ app.controller('MyCtrl', ['$scope', '$state', 'Page',
         $state.go('converters').then(function() {
       	  $('body').toggleClass('pushed-right');
             $('#navbar').toggleClass('in');
-            Page.setTitle('Converters');
+            //Page.setTitle('Converters');
         });
       };
     
@@ -33,7 +33,7 @@ app.controller('MyCtrl', ['$scope', '$state', 'Page',
         $state.go('contact').then(function() {
       	  $('body').toggleClass('pushed-right');
             $('#navbar').toggleClass('in');
-            Page.setTitle('Contact');
+            //Page.setTitle('Contact');
         });
     };
       
@@ -41,7 +41,7 @@ app.controller('MyCtrl', ['$scope', '$state', 'Page',
       $state.go('search').then(function() {
     	  $('body').toggleClass('pushed-right');
           $('#navbar').toggleClass('in');
-          Page.setTitle('Search');
+          //Page.setTitle('Search');
       });
     };
 
@@ -49,14 +49,14 @@ app.controller('MyCtrl', ['$scope', '$state', 'Page',
       $state.go('login').then(function() {
     	  $('body').toggleClass('pushed-right');
           $('#navbar').toggleClass('in');
-          Page.setTitle('Log In');
+          //Page.setTitle('Log In');
       });      
     };
   }
 ]);
 
-app.controller('LogInController', ['$scope', '$http',
-  function LogInController($scope, $http) {
+app.controller('LogInController', ['$rootScope', '$scope', '$http',
+  function LogInController($rootScope, $scope, $http) {
 	
 	$scope.validated = false;
 	
@@ -74,24 +74,24 @@ app.controller('LogInController', ['$scope', '$http',
   }
 ]);
 
-app.controller('getWeatherController', function($scope, $http) {
+app.controller('getWeatherController', ['$rootScope', '$scope', '$http',
+    function getWeatherController($rootScope, $scope, $http) {
 	
-	$scope.checked = false;
-	
-	$scope.calculate = function(){	
-		var num = $scope.inputNum;
-		if(num == undefined || num == ""){
+		$scope.checked = false;
+		
+		$scope.calculate = function(){	
+			var num = $scope.inputNum;
+			if(num == undefined || num == ""){
+				num = "";
+			}
 			num = "";
+			$http.get(wsHostUrl + "webapi/ftocservice/"+num)
+		    .then(function(response) {
+		    	$scope.result = JSON.stringify(response.data);
+		    	$scope.checked = true;
+		    	console.log(response);
+		    	//alert("test");
+	    	});
 		}
-		num = "";
-		$http.get(wsHostUrl + "webapi/ftocservice/"+num)
-	    .then(function(response) {
-	    	$scope.result = JSON.stringify(response.data);
-	    	$scope.checked = true;
-	    	console.log(response);
-	    	//alert("test");
-    	});
-	}
-    
-    
-});
+    }
+]);
