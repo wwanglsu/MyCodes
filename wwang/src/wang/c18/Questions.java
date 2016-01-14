@@ -69,8 +69,9 @@ public class Questions {
         sort012(aaa, 14);
         System.out.println(Arrays.toString(aaa));
         
-        int[][] amatrix={{2,-1,3},{1,4,2},{0,5,3}};
-        System.out.println("SubMatrix with largest sum: "+getMaxMatrix(amatrix));
+        int[][] amatrix={{2,-1,3},{1,4,2},{0,5,3},{0,5,3}};
+        //System.out.println("\n18.12: SubMatrix with largest sum: "+getMaxMatrix(amatrix));
+        System.out.println("\n18.12: SubMatrix with largest sum: "+maxSubMatrix(amatrix));
 
     }
 
@@ -153,7 +154,7 @@ public class Questions {
 
     static int[] pickMIterative(int[] original, int m){
         int[] subset=new int[m];
-        //fill in subset array with first part of origianl array
+        //fill in subset array with first part of original array
         for(int i=0; i<m; i++){
             subset[i]=original[i];
         }
@@ -798,9 +799,50 @@ public class Questions {
             return sumMatrix[row2][col2]-sumMatrix[row2][col1-1]-sumMatrix[row1-1][col2]+sumMatrix[row1-1][col1-1];
         }
     }
+    
+    //O(R^2*C) R rows and C columns Optimized Solution (similar: find subarray with largest sum O(N)) ***
+    public static int maxSubMatrix (int[][] matrix) {
+        int rowCount = matrix.length;
+        int columnCount = matrix[0].length;
+        
+        int[] partialSum = new int[columnCount];
+        int maxSum = 0;
+        
+        for(int rowStart=0; rowStart < rowCount; rowStart++){
+            clearArray(partialSum);
+            for(int rowEnd=rowStart; rowEnd<rowCount; rowEnd++){
+                for(int col=0; col<columnCount;col++){
+                    partialSum[col] += matrix[rowEnd][col];
+                }
+                int tempMaxSum = maxSubArray(partialSum, columnCount);
+                maxSum=Math.max(maxSum, tempMaxSum);
+            }
+        }
+        return maxSum;
+    }
+    
+    private static void clearArray(int[] arr){
+        if(arr==null || arr.length==0) return;
+        for(int i=0; i<arr.length; i++){
+            arr[i] = 0;
+        }
+    }
+    
+    private static int maxSubArray(int[] arr, int length){
+        int max=0;
+        int max_so_far=0;
+        for(int i=0; i<length;i++){
+            max_so_far += arr[i];
+            max=Math.max(max, max_so_far);
+            
+            if(max_so_far<0) max_so_far =0;
+        }
+        return max;
+    }
     /******18.12 N*N matrix with positive and negative, find the submatrix with largest possible sum*************/
 
     /******18. 13 create the largest rectangle of letters such that every row/column forms a word***********/
 
+    
     /******18. 13 create the largest rectangle of letters such that every row/column forms a word***********/
 }
