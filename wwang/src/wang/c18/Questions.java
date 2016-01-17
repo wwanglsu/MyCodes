@@ -15,6 +15,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import wang.utility.ArrayUtility;
+import wang.utility.TrieTree;
 
 public class Questions {
 
@@ -73,6 +74,15 @@ public class Questions {
         //System.out.println("\n18.12: SubMatrix with largest sum: "+getMaxMatrix(amatrix));
         System.out.println("\n18.12: SubMatrix with largest sum: "+maxSubMatrix(amatrix));
 
+        String[] dict_RectangleStrings={"egg","ego","feo","fee","fog","cog","lot"};
+        Questions.RectangleWordDemo rectangleWordDemo =  new Questions().new RectangleWordDemo(dict_RectangleStrings);
+        Rectangle rectangle = rectangleWordDemo.maxRectangle();
+        if(rectangle==null){
+            System.out.println ("No rectangle exists");
+        }else{
+            System.out.println ("Question 18.13: ");
+            rectangle.print();
+        }
     }
 
     /*****18.1 add two numbers, not use + or any arithmetic operator*************/
@@ -842,7 +852,69 @@ public class Questions {
     /******18.12 N*N matrix with positive and negative, find the submatrix with largest possible sum*************/
 
     /******18. 13 create the largest rectangle of letters such that every row/column forms a word***********/
-
-    
+    class RectangleWordDemo{
+        private int maxWordLength;
+        private WordGroup[] groupList;
+        private TrieTree[] trieList;
+        
+        public RectangleWordDemo(String[] list){
+            groupList = WordGroup.createWordGroups(list);
+            maxWordLength = groupList.length;
+            trieList = new TrieTree[maxWordLength];
+        }
+        
+        public Rectangle maxRectangle(){
+            int maxSize = maxWordLength * maxWordLength;
+            
+            for(int z=maxSize; z>0; z--){
+                for(int i=1; i<=maxWordLength; i++){
+                    if(z%i==0){
+                        int j=z/i;
+                        if(j<=maxWordLength){
+                            Rectangle rectangle = makeRectangle(i,j);
+                            if(rectangle != null){
+                                return rectangle;
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+            
+        }
+        
+        private Rectangle makeRectangle(int length, int height){
+            if(groupList[length-1]==null || groupList[height-1]==null) return null;
+            
+            if(trieList[height-1]==null){
+                ArrayList<String> words=groupList[height-1].getWords();
+                trieList[height-1] = new TrieTree(words);
+            }
+            return makePartialRectangle(length, height, new Rectangle(length));
+        }
+        
+        private Rectangle makePartialRectangle(int l, int h, Rectangle rectangle){
+            if(rectangle.height ==h){
+                if(rectangle.isComplete(l, h, groupList[h-1])){
+                    return rectangle;
+                }else{
+                    return null;
+                }
+            }
+            
+            if(!rectangle.isPartialOK(l, trieList[h-1])){
+                return null;
+            }
+            
+            for(int i=0; i<groupList[l-1].length();i++){
+                Rectangle origPlusOne = rectangle.append(groupList[l-1].getWord(i));
+                Rectangle rect = makePartialRectangle(l, h, origPlusOne);
+                if(rect != null){
+                    return rect;
+                }
+            }
+            return null;
+        }        
+    }
     /******18. 13 create the largest rectangle of letters such that every row/column forms a word***********/
 }
