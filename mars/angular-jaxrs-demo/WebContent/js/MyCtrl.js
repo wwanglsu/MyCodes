@@ -1,9 +1,11 @@
 //AngularJS Controller.
 
-app.controller('MyCtrl', ['$rootScope', '$scope', '$state', 'Page',
-  function MyCtrl($rootScope, $scope, $state, Page) {
+app.controller('RootCtrl', ['$rootScope', '$scope', '$state', 'Page',
+  function ($rootScope, $scope, $state, Page) {
 
 	$scope.$Page = Page;
+
+  $rootScope.APIRootUrl = "http://localhost:8080/angular-jaxrs-demo/";
 	
     $scope.home = function() {
       $state.go('home').then(function() {
@@ -55,43 +57,42 @@ app.controller('MyCtrl', ['$rootScope', '$scope', '$state', 'Page',
   }
 ]);
 
-app.controller('LogInController', ['$rootScope', '$scope', '$http',
-  function LogInController($rootScope, $scope, $http) {
+app.controller('LogInController', ['$rootScope', '$scope', '$http', 'DataService',
+  function ($rootScope, $scope, $http, DataService) {
 	
-	$scope.validated = false;
-	
-	$scope.validateUser = function(){	
-		
-		$http.get(wsHostUrl + "webapi/validateuser/"+$scope.username+"/"+$scope.password)
-	    .then(function(response) {
-	    	$scope.result = JSON.stringify(response.data);
-	    	$scope.validated = response.data;
-	    	console.log(response.data);
-	    	//alert("test");
-    	});
-	}
-	
+  	$scope.validated = false;
+  	
+  	$scope.validateUser = function(){	
+  		
+  		$http.get($rootScope.APIRootUrl + "webapi/validateuser/"+$scope.username+"/"+$scope.password)
+  	    .then(function(response) {
+  	    	$scope.result = JSON.stringify(response.data);
+  	    	$scope.validated = response.data;
+  	    	console.log(response.data);
+  	    	//alert("test");
+      	});
+  	}	
   }
 ]);
 
-app.controller('getWeatherController', ['$rootScope', '$scope', '$http',
-    function getWeatherController($rootScope, $scope, $http) {
+app.controller('getWeatherController', ['$rootScope', '$scope', '$http', 'DataService',
+    function ($rootScope, $scope, $http, DataService) {
 	
-		$scope.checked = false;
-		
-		$scope.calculate = function(){	
-			var num = $scope.inputNum;
-			if(num == undefined || num == ""){
-				num = "";
-			}
-			num = "";
-			$http.get(wsHostUrl + "webapi/ftocservice/"+num)
-		    .then(function(response) {
-		    	$scope.result = JSON.stringify(response.data);
-		    	$scope.checked = true;
-		    	console.log(response);
-		    	//alert("test");
-	    	});
-		}
+  		$scope.checked = false;
+  		
+  		$scope.calculate = function(){	
+  			var num = $scope.inputNum;
+  			if(num == undefined || num == ""){
+  				num = "";
+  			}
+  			//num = "";
+  			$http.get($rootScope.APIRootUrl + "webapi/ftocservice/"+num)
+  		    .then(function(response) {
+  		    	$scope.result = JSON.stringify(response.data);
+  		    	$scope.checked = true;
+  		    	console.log(response);
+  		    	//alert("test");
+  	    	});
+  		}
     }
 ]);

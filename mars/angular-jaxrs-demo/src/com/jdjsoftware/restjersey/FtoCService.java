@@ -36,8 +36,7 @@ public class FtoCService {
 	  public Response convertFtoCfromInput(@PathParam("f") float f) throws JSONException {
  
 		JSONObject jsonObject = new JSONObject();
-		float celsius;
-		celsius =  (f - 32)*5/9; 
+		float celsius =  (f - 32)*5/9; 
 		jsonObject.put("fahrenheit", f); 
 		jsonObject.put("celsius", celsius);
 		//"@Produces(\"application/json\") Output: \n\nF to C Converter Output: \n\n" + 

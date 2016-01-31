@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="MyCtrl">
+<html lang="en" ng-app="myApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +23,7 @@
     <![endif]-->
   </head>
 
-  <body >
+  <body ng-controller="RootCtrl">
   	<div class="container">
 	      <!-- Static navbar -->
 	      <nav class="navbar navbar-default">
@@ -35,7 +35,7 @@
 	              <span class="icon-bar"></span>
 	              <span class="icon-bar"></span>
 	            </button>
-	            <a class="navbar-brand" href="#">Project name</a>
+	            <a class="navbar-brand" href="#">Javax RESTful Demo</a>
 	          </div>
 	          <div id="navbar">
 	            <ul class="nav navbar-nav">
@@ -63,7 +63,7 @@
 	        </div><!--/.container-fluid -->
 	      </nav>
 	      <!-- Main component for a primary marketing message or call to action -->
-	      <div ui-view></div>	  
+	      <div ui-view="nav-view"></div>	  
     </div> 
 	<!-- /container -->    
 
