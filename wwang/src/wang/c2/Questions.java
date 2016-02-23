@@ -29,13 +29,13 @@ public class Questions {
 
 		LinkedListNode num1=new LinkedListNode(5); num1.next=new LinkedListNode(3); num1.next.next=new LinkedListNode(9);
 		LinkedListNode num2=new LinkedListNode(8); num2.next=new LinkedListNode(7); num2.next.next=new LinkedListNode(6);
-		//LinkedListNode result=sum_recursive(reverseLinkedList(num1), reverseLinkedList(num2), 0);
-		//System.out.println("Sum: " + reverseLinkedList(result));
+		LinkedListNode result=sum_recursive(reverseLinkedList(num1), reverseLinkedList(num2), 0);
+		System.out.println("Sum: " + reverseLinkedList(result));
 		//LinkedListNode result=sum_iterative(reverseLinkedList(num1), reverseLinkedList(num2), 0);
 		//System.out.println("Sum: " + reverseLinkedList(result));
 
-		LinkedList result=sum_stack(num1, num2, 0);
-		System.out.println("Sum: " + result);
+		LinkedList result2=sum_stack(num1, num2, 0);
+		System.out.println("Sum: " + result2);
 
 		LinkedListNode aHead=new LinkedListNode(0); aHead.next=new LinkedListNode(1); aHead.next.next=new LinkedListNode(2); aHead.next.next.next=new LinkedListNode(2);
 		aHead.next.next.next.next=new LinkedListNode(1); aHead.next.next.next.next.next=new LinkedListNode(0);
@@ -345,8 +345,8 @@ public class Questions {
 
 	/***********Question 6 return the node at the begining of the loop*******************************/
 	static LinkedListNode findBegining(LinkedListNode head){
-		LinkedListNode slow=null;
-		LinkedListNode fast=null;
+		LinkedListNode slow=head;
+		LinkedListNode fast=head;
 
 		while(fast!=null && fast.next!=null){
 			fast=fast.next.next;

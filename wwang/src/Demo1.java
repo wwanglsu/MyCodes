@@ -58,6 +58,8 @@ public class Demo1 {
 			System.out.println(s+" : "+ map.get(s));
 		}
 		System.out.println( map.get("ds") );
+		
+		
 	}
 	
 	static class InnerClass1{
