@@ -20,8 +20,8 @@ import org.apache.hadoop.mapreduce.lib.partition.HashPartitioner;
 
 public class KpiApp {
 	
-	static final String INPUT_PATH = "hdfs://hadoop:9000/cellphone.dat";
-	static final String OUT_PATH = "hdfs://hadoop:9000/outcellphoto";
+	static final String INPUT_PATH = "hdfs://hadoop0:9000/phonedata.dat";
+	static final String OUT_PATH = "hdfs://hadoop0:9000/outcellphoto";
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub

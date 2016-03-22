@@ -16,8 +16,8 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.partition.HashPartitioner;
 
 public class WordCountApp {
-	static final String INPUT_PATH = "hdfs://hadoop:9000/hello";
-	static final String OUT_PATH = "hdfs://hadoop:9000/out";
+	static final String INPUT_PATH = "hdfs://hadoop0:9000/hello";
+	static final String OUT_PATH = "hdfs://hadoop0:9000/out";
 	
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();

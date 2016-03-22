@@ -14,7 +14,7 @@ import org.apache.hadoop.io.IOUtils;
 
 public class App2 {
 //Use FileSystem to handle file read/write
-	public static final String HDFS_PATH = "hdfs://hadoop:9000/hello";
+	public static final String HDFS_PATH = "hdfs://hadoop0:9000/hello";
 	public static final String DIR_PATH="/d1000";
 	public static final String FILE_PATH="/d1000/f1000";
 	
