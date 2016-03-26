@@ -9,5 +9,5 @@
 <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.apache.catalina.startup.Bootstrap"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="cwdemo"/>
-<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="C:\myfolder\apache-tomcat-7.0.65"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="E:\ProgramFiles\tomcat-7.0.56"/>
 </launchConfiguration>

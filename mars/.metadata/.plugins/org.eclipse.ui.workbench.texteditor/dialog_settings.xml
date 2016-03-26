@@ -1,31 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="275" key="DIALOG_WIDTH"/>
+		<item value="168" key="DIALOG_Y_ORIGIN"/>
+		<item value="671" key="DIALOG_X_ORIGIN"/>
+		<item value="403" key="DIALOG_HEIGHT"/>
+		<item value="1|Segoe UI|8.830189|0|WINDOWS|1|-13|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item value="false" key="isRegEx"/>
-		<item value="avanature&lt;/natu" key="selection"/>
-		<item value="false" key="casesensitive"/>
-		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
+		<item value="validateUser" key="selection"/>
 		<list key="findhistory">
-			<item value="avanature&lt;/natu"/>
-			<item value="javanature"/>
-			<item value="javabuilder"/>
-			<item value="search"/>
-			<item value="id"/>
-			<item value="navbar"/>
-			<item value="ng-show"/>
-			<item value="ng-show=&quot;menuOpened&quot;"/>
+			<item value="validateUser"/>
+			<item value="MyCtrl"/>
 		</list>
 		<list key="replacehistory">
-			<item value=""/>
 		</list>
-	</section>
-	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="305" key="DIALOG_WIDTH"/>
-		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="444" key="DIALOG_HEIGHT"/>
-		<item value="9" key="DIALOG_X_ORIGIN"/>
-		<item value="326" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

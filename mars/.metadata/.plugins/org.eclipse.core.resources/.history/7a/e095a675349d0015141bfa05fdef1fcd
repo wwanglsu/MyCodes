@@ -1,8 +1,0 @@
-package myservlets;
-
-import java.io.IOException;
-
-
-public class TestServlet {
-
-}

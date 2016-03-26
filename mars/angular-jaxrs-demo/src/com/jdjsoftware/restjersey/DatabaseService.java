@@ -14,13 +14,15 @@ import java.sql.*;
 @Path("/validateuser")
 public class DatabaseService {
  
-	@Path("{u}{p}")
+	/*@Path("{u}{p}") */
 	@GET
 	@Produces("application/text")
-	public boolean convertCtoFfromInput(@PathParam("u") String u, @PathParam("p") String p) {
+	public boolean validateUser() {
 		
-		String sql = "SELECT email, firstname, lastname, lastmod_ts FROM Users where email='" + u + "' and password_hash ='"+p+"';";
-		return DatabaseHelper.validateUser(sql);
+		//String sql = "SELECT email, firstname, lastname, lastmod_ts FROM Users where email='" + u + "' and password_hash ='"+p+"';";
+		String sql = "SELECT email, firstname, lastname, lastmod_ts FROM Users where email= 'geowwj@gmail.com' and password_hash ='123456!';";
+		boolean res= DatabaseHelper.validateUser(sql);
+		return res;
 	}
 	
 }

@@ -18,7 +18,6 @@
      define subcomponents such as "Valves" at this level.
      Documentation at /docs/config/server.html
  --><Server port="8005" shutdown="SHUTDOWN">
-  <Listener className="org.apache.catalina.startup.VersionLoggerListener"/>
   <!-- Security listener. Documentation at /docs/config/listeners.html
   <Listener className="org.apache.catalina.security.SecurityListener" />
   -->
@@ -127,9 +126,14 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log." suffix=".txt"/>
                
         
+        	
        	
-        
-      <Context docBase="C:\myfolder\gitRepository\MyCodes\mars\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\myfolder\gitRepository\MyCodes\mars\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\angular-jaxrs-demo" path="/angular-jaxrs-demo" reloadable="true" source="org.eclipse.jst.jee.server:angular-jaxrs-demo"/></Host>
+       		
+   		
+      		
+    	
+
+      <Context docBase="E:\GitRepository\git\MyCodes\mars\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="E:\GitRepository\git\MyCodes\mars\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\angular-jaxrs-demo" path="/angular-jaxrs-demo" reloadable="true" source="org.eclipse.jst.jee.server:angular-jaxrs-demo"/></Host>
     </Engine>
   </Service>
 </Server>

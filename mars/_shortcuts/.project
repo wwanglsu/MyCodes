@@ -10,15 +10,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>server.xml</name>
+			<name>tomcat-7.0.56_server.xml</name>
 			<type>1</type>
-			<locationURI>CATALINA_HOME/conf/server.xml</locationURI>
+			<location>E:/ProgramFiles/tomcat-7.0.56/conf/server.xml</location>
 		</link>
 	</linkedResources>
-	<variableList>
-		<variable>
-			<name>CATALINA_HOME</name>
-			<value>file:/C:/myfolder/apache-tomcat-7.0.65</value>
-		</variable>
-	</variableList>
 </projectDescription>
