@@ -1,10 +1,16 @@
-package mapreduce;
+package cmd;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.net.URI;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
+import org.apache.hadoop.fs.FileSystem;
+
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -18,13 +24,23 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.mapreduce.lib.partition.HashPartitioner;
 
-public class KpiApp {
+public class KpiAppCmd extends Configured implements Tool{
 	
-	static final String INPUT_PATH = "hdfs://hadoop0:9000/pphone";
-	static final String OUT_PATH = "hdfs://hadoop0:9000/outppphoto";
+	static String INPUT_PATH = ""; //"hdfs://hadoop0:9000/pphone";
+	static String OUT_PATH = ""; // "hdfs://hadoop0:9000/outqhoto";
 
-	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
+	@Override
+	public int run(String[] arg0) throws Exception {
+		INPUT_PATH = arg0[0];
+		OUT_PATH = arg0[1];
+		
+		Configuration conf = new Configuration();
+		final FileSystem fileSystem = FileSystem.get(new URI(INPUT_PATH), conf);
+		final Path outPath = new Path(OUT_PATH);
+		if(fileSystem.exists(outPath)){
+			fileSystem.delete(outPath, true);
+		}
+		
 		final Job job = new Job(new Configuration(), KpiWritable.class.getSimpleName());
 		//1.1 指定输入文件路径
 		FileInputFormat.setInputPaths(job, INPUT_PATH);
@@ -58,8 +74,11 @@ public class KpiApp {
 		
 		//把代码提交给JobTracker执行
 		job.waitForCompletion(true);
-		
-		
+		return 0;
+	}
+	
+	public static void main(String[] args) throws Exception {
+		ToolRunner.run(new KpiAppCmd(), args);
 	}
 	
 	static class MyMapper extends Mapper<LongWritable, Text, Text, KpiWritable>{
