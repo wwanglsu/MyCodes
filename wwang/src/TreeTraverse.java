@@ -109,23 +109,39 @@ public class TreeTraverse {
 	}
 
 	/***************Iterative******************/
-	static void inOrder_Iterative(Node root){
-		if(root==null) {
-			return;
-		}
-		LinkedList<Node> stack=new LinkedList<Node>();
-		while(true){
-			while(root!=null){
-				stack.push(root);
-				root=root.left;
-			}
-			if(stack.isEmpty()) {
-				return;
-			}
-			root=stack.pop();
-			System.out.print(root+"   ");
-			root=root.right;
-		}
+	//better version
+	public List<Integer> preorderTraversal(TreeNode root) {
+	        Stack<TreeNode> s = new Stack<TreeNode>();
+	        List<Integer> res = new LinkedList<Integer>();
+	        if(root!=null) s.push(root);
+	        while(!s.isEmpty()){
+	            TreeNode curr = s.pop();
+	            res.add(curr.val);
+	            if(curr.right!=null) s.push(curr.right);
+	            if(curr.left!=null) s.push(curr.left);
+	        }
+	        return res;
+	}
+	//better version
+	public List<Integer> preorderTraversal(TreeNode root) {
+	        Stack<TreeNode> stack = new Stack<>();
+	        List<Integer> result = new ArrayList<>();
+	        pushAllLeft(stack, root, result);
+	        while (!stack.isEmpty()) {
+	            TreeNode cur = stack.pop();//栈顶必定是已经添加到过结果里并且访问完了左孩子，该访问右孩子了
+	            if (cur.right != null) {
+	                cur = cur.right;
+	                pushAllLeft(stack, cur, result);
+	            }
+	        }
+	        return result;
+	}
+	public void pushAllLeft(Stack<TreeNode> stack, TreeNode root, List<Integer> result) {
+	    while (root != null) {
+	        stack.push(root);
+	        result.add(root.val);
+	        root = root.left;
+	    }
 	}
 
 	static void preOrder_Iterative(Node root){
@@ -147,7 +163,93 @@ public class TreeTraverse {
 			root=root.right;
 		}
 	}
-
+	
+	//better version
+	public List<Integer> inorderTraversal(TreeNode root) {
+		List<Integer> res = new ArrayList<Integer>();
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		//先将最左边的节点都push进栈
+		if(root != null){
+		    pushAllTheLeft(stack, root);
+		}
+		
+		while(!stack.isEmpty()){
+		    TreeNode curr = stack.pop();
+		    res.add(curr.val); // pre-order, 这个代码 放在pushAllTheLeft()
+		    if(curr.right != null){
+		        pushAllTheLeft(stack, curr.right);
+		    }
+		}
+		
+		return res;
+	}
+	//push all root's left and left's left ... (including root itself) into the stack
+	private void pushAllTheLeft(Stack<TreeNode> stack, TreeNode root){
+		while(root!=null){
+		    stack.push(root);
+		    root = root.left;
+		}
+	}
+	
+	static void inOrder_Iterative(Node root){
+		if(root==null) {
+			return;
+		}
+		LinkedList<Node> stack=new LinkedList<Node>();
+		while(true){
+			while(root!=null){
+				stack.push(root);
+				root=root.left;
+			}
+			if(stack.isEmpty()) {
+				return;
+			}
+			root=stack.pop();
+			System.out.print(root+"   ");
+			root=root.right;
+		}
+	}
+	
+	//better version
+	//Post-Order: 这个版本，跟pre-order的第一版本很类似，也类似BFS的Queue写法
+	//后序遍历的顺序是left - right - root，虽然我们不方便直接得到这个顺序，但是它的逆序还是很好得到的，我们可以用
+	//root - right - left的顺序遍历树，然后反向添加结果就行: （这个更好，简洁）
+	public List<Integer> postorderTraversal(TreeNode root) {
+	        Stack<TreeNode> stk = new Stack<TreeNode>();
+	        if(root != null) stk.push(root);
+	        LinkedList<Integer> res = new LinkedList<Integer>();
+	        while(!stk.isEmpty()){
+	            TreeNode curr = stk.pop();
+	            // 先添加左后添加右，就是先访问右后访问左
+	            if(curr.left != null) stk.push(curr.left);
+	            if(curr.right != null) stk.push(curr.right);
+	            // 反向添加结果，每次加到最前面
+	            res.offerFirst(curr.val);
+	        }
+	        return res;
+	}
+	//OR: 下面这个版本，跟pre-order，in-order 很类似。 better version
+	public List<Integer> postorderTraversal(TreeNode root) {
+	        Stack<TreeNode> stack = new Stack<>();
+	        LinkedList<Integer> result = new LinkedList<Integer>();//注意这里要用linkedlist声明
+	        pushAllRight(stack, root, result);
+	        while (!stack.isEmpty()) {
+	            TreeNode cur = stack.pop();
+	            if (cur.left != null) {
+	                cur = cur.left;
+	                pushAllRight(stack, cur, result);
+	            }
+	        }
+	        return result;
+	} 
+	public void pushAllRight(Stack<TreeNode> stack, TreeNode root, LinkedList<Integer> result) {
+	        while (root != null) {
+	            stack.push(root);
+	            result.addFirst(Integer.valueOf(root.val));
+	            root = root.right;
+	        }
+	}
+	
 	static void postOrder_Iterative_TwoStacks(Node root){
 		if(root==null) {
 			return;
